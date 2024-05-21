@@ -274,22 +274,22 @@ void __declspec(naked) naked_0x4182FF()
     }
 }
 
-unsigned u0x41F81C = 0x41F81C;
+unsigned u0x41F81D = 0x41F81D;
 unsigned u0x41F9ED = 0x41F9ED;
 void __declspec(naked) naked_0x41F816() 
 {
     __asm 
     {
+         // original
         mov eax,[esi+0x434]
-        cmp dword ptr[g_showWings],0x1
-        jne _0x41F81C
-
         push edi
-        test eax,eax
-        jmp u0x41F9ED
 
-        _0x41F81C:
-        jmp u0x41F81C
+        cmp dword ptr[g_showWings],0x1
+        jne _0x41F9ED
+        jmp u0x41F81D
+
+        _0x41F9ED:
+        jmp u0x41F9ED
     }
 }
 
@@ -309,7 +309,7 @@ void hook::cmd()
     // show or hide pets
     util::detour((void*)0x4182FF, naked_0x4182FF, 6);
     // show or hide wings
-    util::detour((void*)0x41F816, naked_0x41F816, 6);
+    util::detour((void*)0x41F816, naked_0x41F816, 7);
     // show or hide mob effects
     util::detour((void*)0x43A142, naked_0x43A142, 5);
 }
