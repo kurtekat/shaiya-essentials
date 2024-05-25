@@ -229,17 +229,8 @@ namespace shaiya
         HMODULE hModule;                    //0x22FFA48
         //
 
-        static void DrawRect(D3DCOLOR argb, long x, long y, long w, long h)
-        {
-            typedef void(__cdecl* LPFN)(D3DCOLOR, long, long, long, long);
-            (*(LPFN)0x4B6180)(argb, x, y, w, h);
-        }
-
-        static void GetMsg(int type, int line, int unknown)
-        {
-            typedef void(__cdecl* LPFN)(int, int, int);
-            (*(LPFN)0x423150)(type, line, unknown);
-        }
+        static void DrawRect(D3DCOLOR argb, long x, long y, long w, long h);
+        static void GetMsg(int type, int line, int unknown);
     };
     #pragma pack(pop)
 }

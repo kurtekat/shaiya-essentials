@@ -62,9 +62,6 @@
     <ClInclude Include="include\shaiya\include\CWindow.h">
       <Filter>include\shaiya\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\shaiya\static.h">
-      <Filter>include\shaiya</Filter>
-    </ClInclude>
     <ClInclude Include="include\shaiya\include\3dc.h">
       <Filter>include\shaiya\include</Filter>
     </ClInclude>
@@ -82,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="include\shaiya\include\MobInfo.h">
       <Filter>include\shaiya\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\static.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +116,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\cmd.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\static.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

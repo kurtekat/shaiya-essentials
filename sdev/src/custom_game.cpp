@@ -1,7 +1,7 @@
 #include <array>
 
 #include <include/main.h>
-#include <include/shaiya/static.h>
+#include <include/static.h>
 #include <include/shaiya/include/CNetwork.h>
 #include <util/include/util.h>
 using namespace shaiya;

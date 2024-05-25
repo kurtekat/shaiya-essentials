@@ -3,7 +3,7 @@
 #include <vector>
 
 #include <include/main.h>
-#include <include/shaiya/static.h>
+#include <include/static.h>
 #include <util/include/util.h>
 using namespace shaiya;
 

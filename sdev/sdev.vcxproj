@@ -37,7 +37,7 @@
     <ClInclude Include="include\shaiya\include\SkillInfo.h" />
     <ClInclude Include="include\shaiya\include\SModel.h" />
     <ClInclude Include="include\shaiya\include\STexture.h" />
-    <ClInclude Include="include\shaiya\static.h" />
+    <ClInclude Include="include\static.h" />
     <ClInclude Include="resources\resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +52,7 @@
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\source.cpp" />
+    <ClCompile Include="src\static.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\sdev.rc" />

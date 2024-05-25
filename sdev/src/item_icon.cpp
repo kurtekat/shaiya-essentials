@@ -1,5 +1,5 @@
 #include <include/main.h>
-#include <include/shaiya/static.h>
+#include <include/static.h>
 #include <include/shaiya/include/CDataFile.h>
 #include <include/shaiya/include/CItem.h>
 #include <include/shaiya/include/ItemInfo.h>
