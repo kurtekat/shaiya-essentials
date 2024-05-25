@@ -3,7 +3,7 @@
 #include <string>
 
 #include <include/main.h>
-#include <include/shaiya/static.h>
+#include <include/static.h>
 #include <include/shaiya/include/CCharacter.h>
 #include <include/shaiya/include/CNetwork.h>
 #include <include/shaiya/include/CWorldMgr.h>
@@ -38,8 +38,6 @@ void revenge_message(CCharacter* killer, std::uint32_t killCount)
 {
     std::copy_n(killer->charName.begin(), killer->charName.size(), g_static->t.begin());
     g_static->v = killCount;
-
-    // 509    "<t> killed  you <v> time(s)."
     Static::GetMsg(5, 509, 1);
 }
 
@@ -164,6 +162,26 @@ void __declspec(naked) naked_0x593D0F()
     }
 }
 
+unsigned n0x41F9ED = 0x41F9ED;
+unsigned u0x41F9C9 = 0x41F9C9;
+void __declspec(naked) naked_0x41F9C0()
+{
+    __asm
+    {
+        // character->wings
+        cmp dword ptr[esi+0x434],0x0
+        jne _0x41F9ED
+
+        // original
+        mov edx,[esi+0x10]
+        fld dword ptr ds:[0x748160]
+        jmp u0x41F9C9
+
+        _0x41F9ED:
+        jmp n0x41F9ED
+    }
+}
+
 void hook::misc()
 {
     // chat color bug workaround
@@ -180,6 +198,8 @@ void hook::misc()
     util::detour((void*)0x4EF2F3, naked_0x4EF2F3, 5);
     // javelin attack bug (0x502 handler)
     util::detour((void*)0x593D0F, naked_0x593D0F, 6);
+    // dungeon wings shadow workaround
+    util::detour((void*)0x41F9C0, naked_0x41F9C0, 9);
 
     // javelin attack bug
 
@@ -191,11 +211,8 @@ void hook::misc()
     // remove ep6 vehicle section (auction board)
     util::write_memory((void*)0x463FE0, 0x07, 1);
     // costume lag workaround
-    std::array<std::uint8_t, 2> a00{ 0x75, 0x2F };
-    util::write_memory((void*)0x56F38D, &a00, 2);
-    std::array<std::uint8_t, 2> a01{ 0x75, 0x1E };
-    util::write_memory((void*)0x583DED, &a01, 2);
+    util::write_memory((void*)0x56F38D, 0x75, 1);
+    util::write_memory((void*)0x583DED, 0x75, 1);
     // pet/wing lag workaround
-    std::array<std::uint8_t, 6> a02{ 0x0F, 0x85, 0x84, 0x00, 0x00, 0x00 };
-    util::write_memory((void*)0x5881ED, &a02, 6);
+    util::write_memory((void*)0x5881EE, 0x85, 1);
 }
