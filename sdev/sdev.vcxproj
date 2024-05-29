@@ -46,6 +46,7 @@
     <ClCompile Include="include\shaiya\src\CTexture.cpp" />
     <ClCompile Include="include\shaiya\src\CWindow.cpp" />
     <ClCompile Include="include\shaiya\src\CWorldMgr.cpp" />
+    <ClCompile Include="src\camera_limit.cpp" />
     <ClCompile Include="src\cmd.cpp" />
     <ClCompile Include="src\custom_game.cpp" />
     <ClCompile Include="src\item_icon.cpp" />

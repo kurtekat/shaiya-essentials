@@ -121,6 +121,9 @@
     <ClCompile Include="src\static.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\camera_limit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\sdev.rc">
