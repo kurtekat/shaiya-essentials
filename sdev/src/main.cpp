@@ -8,4 +8,5 @@ void Main()
     hook::custom_game();
     hook::item_icon();
     hook::misc();
+    hook::vehicle();
 }

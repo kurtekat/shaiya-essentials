@@ -54,6 +54,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\source.cpp" />
     <ClCompile Include="src\static.cpp" />
+    <ClCompile Include="src\vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\sdev.rc" />

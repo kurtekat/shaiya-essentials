@@ -10,6 +10,7 @@ namespace hook
     void custom_game();
     void item_icon();
     void misc();
+    void vehicle();
 }
 
 inline int g_showCostume = false;
