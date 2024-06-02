@@ -21,11 +21,21 @@
 
 namespace shaiya
 {
-    template<class T, int N>
-    using Array = std::array<T, N>;
+    using Packet = UINT8*;
+    using ChatMessage = std::array<char, 128>;
 
-    typedef UINT8* Packet;
-    typedef Array<char, 21> CharName;
+    using CharId = ULONG;
+    using CharName = std::array<char, 21>;
+    using GuildName = std::array<char, 25>;
+
+    using UserId = ULONG;
+    using Username = std::array<char, 32>;
+    using Password = std::array<char, 32>;
+
+    using ItemId = UINT32;
+    using CraftName = std::array<char, 21>;
+    using Gems = std::array<UINT8, 6>;
+    using CloakBadge = Gems;
 
     enum struct Attribute : UINT8
     {
@@ -48,12 +58,6 @@ namespace shaiya
         AdminD,
         AdminE,
         None = 11
-    };
-
-    enum struct Country : UINT8
-    {
-        Light,
-        Fury
     };
 
     enum struct Family : UINT8
@@ -82,37 +86,10 @@ namespace shaiya
         DefenseMage
     };
 
-    #pragma pack(push, 1)
-    struct ReqJob
-    {
-        bool attackFighter;
-        bool defenseFighter;
-        bool patrolRogue;
-        bool shootRogue;
-        bool attackMage;
-        bool defenseMage;
-    };
-    #pragma pack(pop)
-
     enum struct Sex : UINT8
     {
         Male,
         Female
-    };
-
-    enum struct ShapeType : UINT8
-    {
-        None,
-        Chicken = 4,
-        Dog,
-        Horse,
-        Pig,
-        Fox = 10,
-        Wolf,
-        Knight,
-        Stealth,
-        Disguise = 100,
-        Transformation = 102,
     };
 
     #pragma pack(push, 1)

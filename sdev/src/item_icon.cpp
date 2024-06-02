@@ -3,6 +3,7 @@
 #include <include/shaiya/include/CDataFile.h>
 #include <include/shaiya/include/CItem.h>
 #include <include/shaiya/include/ItemInfo.h>
+#include <include/shaiya/include/ItemType.h>
 #include <util/include/util.h>
 using namespace shaiya;
 
@@ -13,12 +14,12 @@ void draw_item_icon(void* unknown, CItem* item, long x, long y)
     (*(LPFN)0x4B7240)(unknown, 0xFFFFFFFF, x, y, item->type, item->typeId, item->count, false, true);
 
     // skip lapis and fireworks
-    if (item->type == ItemType::Gem || item->type == ItemType::Special100)
+    if (item->type == int(ItemType::Gem) || item->type == int(ItemType::Special100))
         return;
 
     for (const auto& typeId : item->gems)
     {
-        auto itemInfo = CDataFile::GetItemInfo(ItemType::Gem, typeId);
+        auto itemInfo = CDataFile::GetItemInfo(int(ItemType::Gem), typeId);
         if (!itemInfo)
             continue;
 

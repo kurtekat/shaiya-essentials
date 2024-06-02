@@ -1,12 +1,15 @@
 #include <array>
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 
 #include <include/main.h>
 #include <include/static.h>
 #include <include/shaiya/include/CNetwork.h>
+#include <include/shaiya/include/NpcType.h>
 #include <util/include/util.h>
 using namespace shaiya;
 
-const std::array<std::uint16_t, 21> weapon_step
+const std::array<UINT16, 21> g_weapon_step
 {
     0, 7, 14, 21, 31, 41, 51, 64, 77, 90, 106, 122, 138, 157, 176, 195, 217, 239, 261, 286, 311
 };
@@ -24,7 +27,7 @@ enum HelpMenuButtonIndex
 void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
 {
     // should not allow two windows at once
-    if (g_static->global.windowType != WindowType::None)
+    if (g_static->global.windowType != GlobalWindowType::None)
     {
         Static::GetMsg(31, 806, 12);
         return;
@@ -34,21 +37,21 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
     case BasicPlay:
     {
-        g_static->global.npcType = NpcType::Blacksmith;
+        g_static->global.npcType = NpcType32::Blacksmith;
         g_static->global.npcTypeId = 40;
         // kill the icon and name for now (to-do?)
         g_static->global.npcIcon = -1;
         std::memset((char*)0x22AB7B8, 0, 128);
-        g_static->global.windowType = WindowType::Blacksmith;
+        g_static->global.windowType = GlobalWindowType::Blacksmith;
         break;
     }
     case PlayGuide:
     {
-        g_static->global.npcType = NpcType::Merchant;
+        g_static->global.npcType = NpcType32::Merchant;
         g_static->global.npcTypeId = 248;
         g_static->global.npcIcon = -1;
         std::memset((char*)0x22AB7B8, 0, 128);
-        g_static->global.windowType = WindowType::Recreation;
+        g_static->global.windowType = GlobalWindowType::Recreation;
         break;
     }
     case Interface:
@@ -61,7 +64,7 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
             g_static->killLv = 0;
             g_static->deathLv = 0;
 
-            g_static->global.npcType = NpcType::VetManager;
+            g_static->global.npcType = NpcType32::VetManager;
             g_static->global.npcTypeId = 1;
             g_static->global.npcIcon = -1;
             std::memset((char*)0x22AB7B8, 0, 128);
@@ -74,7 +77,7 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
             g_static->killLv = 0;
             g_static->deathLv = 0;
 
-            g_static->global.npcType = NpcType::VetManager;
+            g_static->global.npcType = NpcType32::VetManager;
             g_static->global.npcTypeId = 2;
             g_static->global.npcIcon = -1;
             std::memset((char*)0x22AB7B8, 0, 128);
@@ -86,19 +89,19 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
         if (g_static->global.country == Country::Light)
         {
-            g_static->global.npcType = NpcType::Merchant;
+            g_static->global.npcType = NpcType32::Merchant;
             g_static->global.npcTypeId = 179;
             g_static->global.npcIcon = -1;
             std::memset((char*)0x22AB7B8, 0, 128);
-            g_static->global.windowType = WindowType::BankTeller;
+            g_static->global.windowType = GlobalWindowType::BankTeller;
         }
         else
         {
-            g_static->global.npcType = NpcType::Merchant;
+            g_static->global.npcType = NpcType32::Merchant;
             g_static->global.npcTypeId = 180;
             g_static->global.npcIcon = -1;
             std::memset((char*)0x22AB7B8, 0, 128);
-            g_static->global.windowType = WindowType::BankTeller;
+            g_static->global.windowType = GlobalWindowType::BankTeller;
         }
 
         break;
@@ -107,30 +110,30 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
         if (g_static->global.country == Country::Light)
         {
-            g_static->global.npcType = NpcType::GuildMaster;
+            g_static->global.npcType = NpcType32::GuildMaster;
             g_static->global.npcTypeId = 1;
             g_static->global.npcIcon = -1;
             std::memset((char*)0x22AB7B8, 0, 128);
-            g_static->global.windowType = WindowType::GuildMaster;
+            g_static->global.windowType = GlobalWindowType::GuildMaster;
         }
         else
         {
-            g_static->global.npcType = NpcType::GuildMaster;
+            g_static->global.npcType = NpcType32::GuildMaster;
             g_static->global.npcTypeId = 2;
             g_static->global.npcIcon = -1;
             std::memset((char*)0x22AB7B8, 0, 128);
-            g_static->global.windowType = WindowType::GuildMaster;
+            g_static->global.windowType = GlobalWindowType::GuildMaster;
         }
 
         break;
     }
     case PlayMode:
     {
-        g_static->global.npcType = NpcType::Merchant;
+        g_static->global.npcType = NpcType32::Merchant;
         g_static->global.npcTypeId = 437;
         g_static->global.npcIcon = -1;
         std::memset((char*)0x22AB7B8, 0, 128);
-        g_static->global.windowType = WindowType::Merchant;
+        g_static->global.windowType = GlobalWindowType::Merchant;
         break;
     }
     default:
@@ -138,12 +141,12 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     }
 }
 
-int get_weapon_step(std::uint8_t step)
+int get_weapon_step(UINT8 enchantStep)
 {
-    if (step >= weapon_step.size())
+    if (enchantStep >= g_weapon_step.size())
         return 0;
 
-    return weapon_step[step];
+    return g_weapon_step[enchantStep];
 }
 
 unsigned u0x4B8766 = 0x4B8766;
