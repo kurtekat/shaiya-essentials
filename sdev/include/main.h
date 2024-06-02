@@ -8,8 +8,10 @@ namespace hook
     void camera_limit();
     void cmd();
     void custom_game();
+    void gui();
     void item_icon();
-    void misc();
+    void name_color();
+    void packet();
     void vehicle();
 }
 

@@ -21,38 +21,45 @@
   <ItemGroup>
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\shaiya\common.h" />
-    <ClInclude Include="include\shaiya\include\3dc.h" />
+    <ClInclude Include="include\shaiya\include\BillingItem.h" />
     <ClInclude Include="include\shaiya\include\CDataFile.h" />
-    <ClInclude Include="include\shaiya\include\CWindow.h" />
+    <ClInclude Include="include\shaiya\include\ShaiyaColor.h" />
+    <ClInclude Include="include\shaiya\include\Country.h" />
     <ClInclude Include="include\shaiya\include\CCharacter.h" />
     <ClInclude Include="include\shaiya\include\CGuild.h" />
     <ClInclude Include="include\shaiya\include\CItem.h" />
     <ClInclude Include="include\shaiya\include\CMonster.h" />
     <ClInclude Include="include\shaiya\include\CNetwork.h" />
     <ClInclude Include="include\shaiya\include\CNpc.h" />
-    <ClInclude Include="include\shaiya\include\CTexture.h" />
     <ClInclude Include="include\shaiya\include\CWorldMgr.h" />
+    <ClInclude Include="include\shaiya\include\ExtDuration.h" />
+    <ClInclude Include="include\shaiya\include\ItemEffect.h" />
     <ClInclude Include="include\shaiya\include\ItemInfo.h" />
+    <ClInclude Include="include\shaiya\include\ItemType.h" />
     <ClInclude Include="include\shaiya\include\MobInfo.h" />
+    <ClInclude Include="include\shaiya\include\MotionType.h" />
+    <ClInclude Include="include\shaiya\include\NeedWeapon.h" />
+    <ClInclude Include="include\shaiya\include\NpcType.h" />
+    <ClInclude Include="include\shaiya\include\ReqOg.h" />
+    <ClInclude Include="include\shaiya\include\ShapeType.h" />
+    <ClInclude Include="include\shaiya\include\SkillAbilityType.h" />
     <ClInclude Include="include\shaiya\include\SkillInfo.h" />
-    <ClInclude Include="include\shaiya\include\SModel.h" />
-    <ClInclude Include="include\shaiya\include\STexture.h" />
     <ClInclude Include="include\static.h" />
     <ClInclude Include="resources\resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\shaiya\src\CDataFile.cpp" />
     <ClCompile Include="include\shaiya\src\CNetwork.cpp" />
-    <ClCompile Include="include\shaiya\src\CTexture.cpp" />
-    <ClCompile Include="include\shaiya\src\CWindow.cpp" />
     <ClCompile Include="include\shaiya\src\CWorldMgr.cpp" />
     <ClCompile Include="src\camera_limit.cpp" />
     <ClCompile Include="src\cmd.cpp" />
     <ClCompile Include="src\custom_game.cpp" />
+    <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\item_icon.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\source.cpp" />
+    <ClCompile Include="src\name_color.cpp" />
+    <ClCompile Include="src\packet.cpp" />
     <ClCompile Include="src\static.cpp" />
     <ClCompile Include="src\vehicle.cpp" />
   </ItemGroup>
