@@ -50,7 +50,7 @@ namespace shaiya
         Wind2
     };
 
-    enum struct AuthStatus : UINT32
+    enum struct AuthStatus : UINT8
     {
         AdminA = 1,
         AdminB,
