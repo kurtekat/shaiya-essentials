@@ -10,5 +10,6 @@ void Main()
     hook::item_icon();
     hook::name_color();
     hook::packet();
+    hook::quick_slot();
     hook::vehicle();
 }

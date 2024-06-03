@@ -23,6 +23,8 @@
     <ClInclude Include="include\shaiya\common.h" />
     <ClInclude Include="include\shaiya\include\BillingItem.h" />
     <ClInclude Include="include\shaiya\include\CDataFile.h" />
+    <ClInclude Include="include\shaiya\include\CQuickSlot.h" />
+    <ClInclude Include="include\shaiya\include\CWindow.h" />
     <ClInclude Include="include\shaiya\include\ShaiyaColor.h" />
     <ClInclude Include="include\shaiya\include\Country.h" />
     <ClInclude Include="include\shaiya\include\CCharacter.h" />
@@ -44,12 +46,14 @@
     <ClInclude Include="include\shaiya\include\ShapeType.h" />
     <ClInclude Include="include\shaiya\include\SkillAbilityType.h" />
     <ClInclude Include="include\shaiya\include\SkillInfo.h" />
+    <ClInclude Include="include\shaiya\include\Unknown.h" />
     <ClInclude Include="include\static.h" />
     <ClInclude Include="resources\resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\shaiya\src\CDataFile.cpp" />
     <ClCompile Include="include\shaiya\src\CNetwork.cpp" />
+    <ClCompile Include="include\shaiya\src\CQuickSlot.cpp" />
     <ClCompile Include="include\shaiya\src\CWorldMgr.cpp" />
     <ClCompile Include="src\camera_limit.cpp" />
     <ClCompile Include="src\cmd.cpp" />
@@ -60,6 +64,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\name_color.cpp" />
     <ClCompile Include="src\packet.cpp" />
+    <ClCompile Include="src\quick_slot.cpp" />
     <ClCompile Include="src\static.cpp" />
     <ClCompile Include="src\vehicle.cpp" />
   </ItemGroup>

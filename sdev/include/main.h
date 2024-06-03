@@ -12,6 +12,7 @@ namespace hook
     void item_icon();
     void name_color();
     void packet();
+    void quick_slot();
     void vehicle();
 }
 

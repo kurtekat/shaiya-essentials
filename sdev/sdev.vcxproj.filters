@@ -104,6 +104,15 @@
     <ClInclude Include="include\shaiya\include\ShaiyaColor.h">
       <Filter>include\shaiya\include</Filter>
     </ClInclude>
+    <ClInclude Include="include\shaiya\include\CQuickSlot.h">
+      <Filter>include\shaiya\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shaiya\include\Unknown.h">
+      <Filter>include\shaiya\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shaiya\include\CWindow.h">
+      <Filter>include\shaiya\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -147,6 +156,12 @@
     </ClCompile>
     <ClCompile Include="src\name_color.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quick_slot.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="include\shaiya\src\CQuickSlot.cpp">
+      <Filter>include\shaiya\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

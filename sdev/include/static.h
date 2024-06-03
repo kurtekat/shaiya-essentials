@@ -125,7 +125,12 @@ namespace shaiya
         NpcType32 npcType;            //0x91AD44  0xDB74
         PAD(26802894);
         Country country;              //0x22AA816  0x199D646
-        PAD(1573);
+        PAD(801);
+        UINT8 quickSlot1Bar;          //0x22AAB38  0x199D968
+        UINT8 quickSlot2Bar;          //0x22AAB39  0x199D969
+        // custom
+        UINT8 quickSlot3Bar;          //0x22AAB3A  0x199D96A
+        PAD(769);
         UINT32 kills;                 //0x22AAE3C  0x199DC6C
         UINT32 deaths;                //0x22AAE40  0x199DC70
         PAD(2584);
