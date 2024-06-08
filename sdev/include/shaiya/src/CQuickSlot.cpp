@@ -1,4 +1,4 @@
-#include <include/shaiya/include/CQuickSlot.h>
+#include "include/shaiya/include/CQuickSlot.h"
 using namespace shaiya;
 
 CQuickSlot* CQuickSlot::Init(void* block, int id)

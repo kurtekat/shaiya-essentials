@@ -1,5 +1,5 @@
 #pragma once
-#include <include/shaiya/common.h>
+#include "include/shaiya/common.h"
 
 namespace shaiya
 {
@@ -9,7 +9,7 @@ namespace shaiya
         PAD(4);
         D2D_POINT_2U pos;       //0x04
         D2D_SIZE_U size;        //0x0C
-        BOOL dragEvent;         //0x14
+        BOOL dragMove;          //0x14
         D2D_POINT_2U clickPos;  //0x18
         BOOL visible;           //0x20
         // 0x24

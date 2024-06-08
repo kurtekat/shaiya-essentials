@@ -4,12 +4,11 @@
 #include <string>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
-#include <include/main.h>
-#include <include/static.h>
-#include <include/shaiya/include/CQuickSlot.h>
-#include <include/shaiya/include/Unknown.h>
-#include <util/include/util.h>
+#include <util/util.h>
+#include "include/main.h"
+#include "include/static.h"
+#include "include/shaiya/include/CQuickSlot.h"
+#include "include/shaiya/include/Unknown.h"
 using namespace shaiya;
 
 inline CQuickSlot* g_pQuickSlot3 = nullptr;

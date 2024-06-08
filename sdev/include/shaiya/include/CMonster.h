@@ -1,5 +1,5 @@
 #pragma once
-#include <include/shaiya/common.h>
+#include "include/shaiya/common.h"
 
 namespace shaiya
 {
@@ -18,8 +18,8 @@ namespace shaiya
         PAD(4);
         UINT32 maxHealth;    //0x54
         UINT32 health;       //0x58
-        D3DVECTOR nextPos;   //0x5C
-        D3DVECTOR nextDir;   //0x68
+        D3DVECTOR movePos;   //0x5C
+        D3DVECTOR moveDir;   //0x68
         UINT32 model;        //0x74
         PAD(36);
         ULONG targetId;      //0x9C

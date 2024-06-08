@@ -1,5 +1,5 @@
 #pragma once
-#include <include/shaiya/common.h>
+#include "include/shaiya/common.h"
 
 namespace shaiya
 {
@@ -15,7 +15,9 @@ namespace shaiya
         CraftName craftName;  //0x0C
         PAD(3);
         BOOL isBagToBag;      //0x24
-        PAD(12);
+        ULONG fromDate;       //0x28
+        ULONG toDate;         //0x2C
+        PAD(4);
         // 0x34
     };
     #pragma pack(pop)

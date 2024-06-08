@@ -2,9 +2,8 @@
 #include <format>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
-#include <include/main.h>
-#include <util/include/util.h>
+#include <util/util.h>
+#include "include/main.h"
 
 void format_chat_color_size(char* text)
 {

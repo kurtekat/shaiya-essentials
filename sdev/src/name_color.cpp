@@ -1,11 +1,8 @@
 #include <map>
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
-#include <include/main.h>
-#include <include/static.h>
-#include <include/shaiya/include/ShaiyaColor.h>
-#include <util/include/util.h>
+#include <util/util.h>
+#include "include/main.h"
+#include "include/static.h"
+#include "include/shaiya/include/ShaiyaColor.h"
 using namespace shaiya;
 
 namespace name_color
@@ -29,9 +26,9 @@ namespace name_color
         { -5, ShaiyaColor::LightBlue }
     };
 
-    ShaiyaColor get_by_lv_gap(int otherLv)
+    ShaiyaColor get_by_lv_gap(int level)
     {
-        int gap = otherLv - g_static->global.level;
+        int gap = level - g_static->global.level;
         if (gap >= 10)
             return ShaiyaColor::Gray;
 

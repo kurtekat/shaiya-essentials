@@ -1,10 +1,11 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-#include <include/main.h>
-#include <include/static.h>
-#include <util/include/util.h>
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <util/util.h>
+#include "include/main.h"
+#include "include/static.h"
 using namespace shaiya;
 
 void get_global_config()

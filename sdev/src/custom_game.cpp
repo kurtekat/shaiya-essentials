@@ -1,15 +1,12 @@
 #include <array>
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
-#include <include/main.h>
-#include <include/static.h>
-#include <include/shaiya/include/CNetwork.h>
-#include <include/shaiya/include/NpcType.h>
-#include <util/include/util.h>
+#include <util/util.h>
+#include "include/main.h"
+#include "include/static.h"
+#include "include/shaiya/include/CNetwork.h"
+#include "include/shaiya/include/NpcType.h"
 using namespace shaiya;
 
-const std::array<UINT16, 21> g_weapon_step
+const std::array<uint16_t, 21> g_weapon_step
 {
     0, 7, 14, 21, 31, 41, 51, 64, 77, 90, 106, 122, 138, 157, 176, 195, 217, 239, 261, 286, 311
 };
@@ -58,7 +55,7 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
         if (g_static->global.country == Country::Light)
         {
-            std::uint16_t packet{ 0x218 };
+            uint16_t packet{ 0x218 };
             CNetwork::Send(&packet, 2);
 
             g_static->killLv = 0;
@@ -71,7 +68,7 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
         }
         else
         {
-            std::uint16_t packet{ 0x218 };
+            uint16_t packet{ 0x218 };
             CNetwork::Send(&packet, 2);
 
             g_static->killLv = 0;
@@ -141,7 +138,7 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     }
 }
 
-int get_weapon_step(UINT8 enchantStep)
+int get_weapon_step(uint8_t enchantStep)
 {
     if (enchantStep >= g_weapon_step.size())
         return 0;

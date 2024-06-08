@@ -2,13 +2,12 @@
 #include <map>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
-#include <include/main.h>
-#include <include/shaiya/include/CCharacter.h>
-#include <include/shaiya/include/CDataFile.h>
-#include <include/shaiya/include/ItemInfo.h>
-#include <include/shaiya/include/ItemType.h>
-#include <util/include/util.h>
+#include <util/util.h>
+#include "include/main.h"
+#include "include/shaiya/include/CCharacter.h"
+#include "include/shaiya/include/CDataFile.h"
+#include "include/shaiya/include/ItemInfo.h"
+#include "include/shaiya/include/ItemType.h"
 using namespace shaiya;
 
 namespace vehicle
@@ -60,13 +59,13 @@ namespace vehicle
         // models coded in game.exe
         if (model == 31 || model == 32)
         {
-            UINT8 bone = 0x03;
+            uint8_t bone = 0x03;
             std::memcpy((void*)0x414B13, &bone, 1);
             std::memcpy((void*)0x414B67, &bone, 1);
             return 1;
         }
 
-        UINT8 main = get_main_bone(model);
+        uint8_t main = get_main_bone(model);
 
         if (!main)
             return 0;
@@ -81,8 +80,8 @@ namespace vehicle
         // models coded in game.exe
         if (model == 14 || model == 15 || model == 21)
         {
-            UINT8 rear = 0x44;
-            UINT8 main = 0x31;
+            uint8_t rear = 0x44;
+            uint8_t main = 0x31;
 
             // rear bone
             std::memcpy((void*)0x4137A2, &rear, 1);
@@ -94,8 +93,8 @@ namespace vehicle
             return 1;
         }
 
-        UINT8 main = get_main_bone(model);
-        UINT8 rear = get_rear_bone(model);
+        uint8_t main = get_main_bone(model);
+        uint8_t rear = get_rear_bone(model);
 
         if (!main || !rear)
             return 0;
@@ -215,6 +214,6 @@ void hook::vehicle()
     // dual vehicles
     util::detour((void*)0x412FF0, naked_0x412FF0, 8);
     // play the default sound
-    std::array<UINT8, 6> a00{ 0xE9, 0xD0, 0x00, 0x00, 0x00, 0x90 };
+    std::array<uint8_t, 6> a00{ 0xE9, 0xD0, 0x00, 0x00, 0x00, 0x90 };
     util::write_memory((void*)0x41A7DF, &a00, 6);
 }

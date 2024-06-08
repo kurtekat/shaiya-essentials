@@ -1,5 +1,5 @@
-#include <include/main.h>
-#include <util/include/util.h>
+#include <util/util.h>
+#include "include/main.h"
 
 unsigned u0x442BD3 = 0x442BD3;
 void __declspec(naked) naked_0x442BCD()

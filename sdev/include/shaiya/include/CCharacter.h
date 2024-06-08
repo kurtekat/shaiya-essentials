@@ -1,8 +1,9 @@
 #pragma once
-#include <include/shaiya/common.h>
-#include <include/shaiya/include/Country.h>
-#include <include/shaiya/include/MotionType.h>
-#include <include/shaiya/include/ShapeType.h>
+#include <array>
+#include "include/shaiya/common.h"
+#include "include/shaiya/include/Country.h"
+#include "include/shaiya/include/MotionType.h"
+#include "include/shaiya/include/ShapeType.h"
 
 namespace shaiya
 {
@@ -59,8 +60,8 @@ namespace shaiya
         UINT32 maxMana;               //0x164
         UINT32 stamina;               //0x168
         UINT32 maxStamina;            //0x16C
-        D3DVECTOR nextPos;            //0x170
-        D3DVECTOR nextDir;            //0x17C
+        D3DVECTOR movePos;            //0x170
+        D3DVECTOR moveDir;            //0x17C
         ULONG targetId;               //0x188
         PAD(4);
         BOOL running;                 //0x190

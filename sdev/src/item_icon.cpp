@@ -1,10 +1,10 @@
-#include <include/main.h>
-#include <include/static.h>
-#include <include/shaiya/include/CDataFile.h>
-#include <include/shaiya/include/CItem.h>
-#include <include/shaiya/include/ItemInfo.h>
-#include <include/shaiya/include/ItemType.h>
-#include <util/include/util.h>
+#include <util/util.h>
+#include "include/main.h"
+#include "include/static.h"
+#include "include/shaiya/include/CDataFile.h"
+#include "include/shaiya/include/CItem.h"
+#include "include/shaiya/include/ItemInfo.h"
+#include "include/shaiya/include/ItemType.h"
 using namespace shaiya;
 
 void draw_item_icon(void* unknown, CItem* item, long x, long y)

@@ -1,7 +1,8 @@
 #pragma once
-#include <include/shaiya/common.h>
-#include <include/shaiya/include/NeedWeapon.h>
-#include <include/shaiya/include/SkillAbilityType.h>
+#include <array>
+#include "include/shaiya/common.h"
+#include "include/shaiya/include/NeedWeapon.h"
+#include "include/shaiya/include/SkillAbilityType.h"
 
 namespace shaiya
 {

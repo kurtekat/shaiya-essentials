@@ -2,6 +2,7 @@
 #include <array>
 #pragma warning(disable: 4005)
 #define DIRECTINPUT_VERSION 0x800
+#define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <mmsystem.h>
