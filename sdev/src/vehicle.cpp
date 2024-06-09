@@ -1,9 +1,13 @@
 #include <array>
+#include <format>
 #include <map>
+#include <string>
+#include <vector>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <util/util.h>
 #include "include/main.h"
+#include "include/static.h"
 #include "include/shaiya/include/CCharacter.h"
 #include "include/shaiya/include/CDataFile.h"
 #include "include/shaiya/include/ItemInfo.h"
@@ -12,46 +16,82 @@ using namespace shaiya;
 
 namespace vehicle
 {
-    int get_main_bone(int model)
+    struct Vehicle
+    {
+        int model;
+        int bone1;
+        int bone2;
+        std::string wavFileName;
+    };
+
+    std::vector<Vehicle> g_vehicles{};
+
+    void init()
     {
         for (int i = 1; i <= 255; ++i)
         {
             auto itemInfo = CDataFile::GetItemInfo(int(ItemType::Vehicle), i);
-
             if (!itemInfo)
                 continue;
 
-            if (itemInfo->vehicleModel == model)
-            {
-                if (!itemInfo->reqRec)
-                    continue;
+            if (!itemInfo->reqRec)
+                continue;
 
-                return itemInfo->reqRec;
-            }
+            Vehicle vehicle{};
+            vehicle.model = itemInfo->vehicleModel;
+            vehicle.bone1 = itemInfo->reqRec;
+            vehicle.bone2 = itemInfo->reqInt;
+            // e.g., vehicle_model033.wav
+            vehicle.wavFileName = std::format("vehicle_model{:03d}.wav", vehicle.model);
+            g_vehicles.push_back(vehicle);
+        }
+    }
+
+    int play_wav(CCharacter* user)
+    {
+        auto model = user->vehicleModel;
+        if (model <= 32)
+            return 1;
+
+        auto vehicle = std::find_if(g_vehicles.begin(), g_vehicles.end(), [&model](const auto& vehicle) {
+            return vehicle.model == model;
+            });
+
+        if (vehicle != g_vehicles.end())
+        {
+            if (Static::PlayWav(vehicle->wavFileName.c_str(), &user->pos, 1000.0f, false))
+                return 0;
         }
 
+        Static::PlayWav("ef_dmg_transf01.wav", &user->pos, 1000.0f, false);
         return 0;
+    }
+
+    int get_main_bone(int model)
+    {
+        auto vehicle = std::find_if(g_vehicles.begin(), g_vehicles.end(), [&model] (const auto& vehicle) {
+            return vehicle.model == model;
+            });
+
+        if (vehicle == g_vehicles.end())
+            return 0;
+
+        return vehicle->bone1;
     }
 
     int get_rear_bone(int model)
     {
-        for (int i = 1; i <= 255; ++i)
-        {
-            auto itemInfo = CDataFile::GetItemInfo(int(ItemType::Vehicle), i);
+        auto vehicle = std::find_if(g_vehicles.begin(), g_vehicles.end(), [&model] (const auto& vehicle) {
+            return vehicle.model == model;
+            });
 
-            if (!itemInfo)
-                continue;
+        if (vehicle == g_vehicles.end())
+            return 0;
 
-            if (itemInfo->vehicleModel == model)
-            {
-                if (!itemInfo->reqRec)
-                    continue;
+        if (!vehicle->bone1)
+            return 0;
 
-                return itemInfo->reqInt;
-            }
-        }
-
-        return 0;
+        return vehicle->bone2;
     }
 
     int set_solo_bone(int model)
@@ -207,13 +247,58 @@ void __declspec(naked) naked_0x412FF0()
     }
 }
 
+unsigned u0x74A350 = 0x74A350;
+unsigned u0x4315F9 = 0x4315F9;
+void __declspec(naked) naked_0x4315F4()
+{
+    __asm
+    {
+        pushad
+
+        call vehicle::init
+
+        popad
+
+        // original
+        push u0x74A350
+        jmp u0x4315F9
+    }
+}
+
+unsigned u0x41A912 = 0x41A912;
+unsigned u0x41A806 = 0x41A806;
+void __declspec(naked) naked_0x41A7FF()
+{
+    __asm
+    {
+        pushad
+
+        push esi // user
+        call vehicle::play_wav
+        add esp,0x4
+        test eax,eax
+
+        popad
+
+        je _0x41A912
+
+        // original
+        movzx eax,byte ptr[esi+0x2B8]
+        jmp u0x41A806
+
+        _0x41A912:
+        jmp u0x41A912
+    }
+}
+
 void hook::vehicle()
 {
+    // allocate vehicles
+    util::detour((void*)0x4315F4, naked_0x4315F4, 5);
     // solo vehicles
     util::detour((void*)0x4145FE, naked_0x4145FE, 8);
     // dual vehicles
     util::detour((void*)0x412FF0, naked_0x412FF0, 8);
-    // play the default sound
-    std::array<uint8_t, 6> a00{ 0xE9, 0xD0, 0x00, 0x00, 0x00, 0x90 };
-    util::write_memory((void*)0x41A7DF, &a00, 6);
+    // play .wav by model
+    util::detour((void*)0x41A7FF, naked_0x41A7FF, 7);
 }
