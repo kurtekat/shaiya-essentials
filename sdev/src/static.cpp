@@ -13,8 +13,8 @@ void Static::GetMsg(int type, int line, int unknown)
     (*(LPFN)0x423150)(type, line, unknown);
 }
 
-void Static::PlayWav(const char* filename, D3DVECTOR* pos, float volume, bool repeat)
+bool Static::PlayWav(const char* filename, D3DVECTOR* origin, float volume, bool repeat)
 {
-    typedef void(__thiscall* LPFN)(void*, const char*, D3DVECTOR*, float, bool);
-    (*(LPFN)0x56C650)((void*)0x22B4030, filename, pos, volume, repeat);
+    typedef bool(__thiscall* LPFN)(void*, const char*, D3DVECTOR*, float, bool);
+    return (*(LPFN)0x56C650)((void*)0x22B4030, filename, origin, volume, repeat);
 }

@@ -263,7 +263,7 @@ namespace shaiya
 
         static void DrawRect(D3DCOLOR argb, long x, long y, long w, long h);
         static void GetMsg(int type, int line, int unknown);
-        static void PlayWav(const char* filename, D3DVECTOR* pos, float volume, bool repeat);
+        static bool PlayWav(const char* filename, D3DVECTOR* origin, float volume, bool repeat);
     };
     #pragma pack(pop)
 }
