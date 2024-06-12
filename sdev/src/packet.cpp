@@ -1,6 +1,4 @@
 #include <array>
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <strsafe.h>
 #include <util/util.h>
 #include "include/main.h"
@@ -30,6 +28,15 @@ namespace packet
         StringCbCopyA(g_static->t.data(), g_static->t.size(), killer->charName.data());
         g_static->v = killCount;
         Static::GetMsg(5, 509, 1);
+    }
+
+    void check_add_money(uint32_t money)
+    {
+        constexpr auto max_money = UINT_MAX;
+        if (money > (max_money - g_static->global.money))
+            g_static->global.money = max_money;
+        else
+            g_static->global.money += money;
     }
 }
 
@@ -114,6 +121,23 @@ void __declspec(naked) naked_0x593D0F()
     }
 }
 
+unsigned u0x5AA23B = 0x5AA23B;
+void __declspec(naked) naked_0x5AA235()
+{
+    __asm
+    {
+        pushad
+
+        push eax // money
+        call packet::check_add_money
+        add esp,0x4
+
+        popad
+
+        jmp u0x5AA23B
+    }
+}
+
 void hook::packet()
 {
     // disguise bug
@@ -124,6 +148,8 @@ void hook::packet()
     util::detour((void*)0x4EF2F3, naked_0x4EF2F3, 5);
     // javelin attack bug (0x502 handler)
     util::detour((void*)0x593D0F, naked_0x593D0F, 6);
+    // add quest result gold (0x903 handler)
+    util::detour((void*)0x5AA235, naked_0x5AA235, 6);
 
     // javelin attack bug
 
