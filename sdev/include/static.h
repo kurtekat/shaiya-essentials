@@ -8,9 +8,9 @@
 
 namespace shaiya
 {
-    using Inventory = std::array<std::array<CItem, 24>, 6>;
-    using Warehouse = std::array<CItem, 240>;
-    using Bank = std::array<BillingItem, 240>;
+    using Inventory = Array<Array<CItem, 24>, 6>;
+    using Warehouse = Array<CItem, 240>;
+    using Bank = Array<BillingItem, 240>;
     using StoredPointItems = Bank;
 
     enum struct GlobalWindowType : UINT32
@@ -57,9 +57,13 @@ namespace shaiya
         AuthStatus authStatus;        //0x90D1D4  0x04
         PAD(3);
         BOOL isAdmin;                 //0x90D1D8  0x08
-        PAD(8);
+        UINT32 money;                 //0x90D1DC  0x0C
+        PAD(4);
         UINT32 level;                 //0x90D1E4  0x14
-        PAD(24);
+        UINT32 maxHealth;             //0x90D1E8  0x18
+        UINT32 maxMana;               //0x90D1EC  0x1C
+        UINT32 maxStamina;            //0x90D1F0  0x20
+        PAD(12);
         UINT16 strength;              //0x90D200  0x30
         UINT16 intelligence;          //0x90D202  0x32
         UINT16 dexterity;             //0x90D204  0x34
@@ -112,7 +116,7 @@ namespace shaiya
         UINT8 weaponTypeId;           //0x91449A  0x72CA
         UINT8 shieldTypeId;           //0x91449B  0x72CB
         PAD(50);
-        CharName charName;            //0x9144CE  0x72FE
+        CharArray<21> charName;       //0x9144CE  0x72FE
         PAD(1);
         GlobalWindowType windowType;  //0x9144E4  0x7314
         PAD(8);
@@ -203,28 +207,27 @@ namespace shaiya
         StaticTargetType targetType;   //0x7ABBE0
         PAD(84796);
         // 0x7C0720
-        std::array<char, MAX_PATH> iniFileName;
+        CharArray<MAX_PATH> iniFileName;
         // 0x7C0824
         PAD(1416);
         float fogStart;                //0x7C0DAC
         float fogEnd;                  //0x7C0DB0
         PAD(28);
-        // 0x7C0DD0
-        std::array<char, 16> ipv4Addr;
+        CharArray<16> ipv4Addr;        //0x7C0DD0
         // 0x7C0DE0
         PAD(1468);
         HWND hwnd;                     //0x7C139C
         HINSTANCE hinst;               //0x7C13A0
         PAD(1940);
         // <t>
-        std::array<char, 512> t;       //0x7C1B38
+        CharArray<512> t;              //0x7C1B38
         PAD(1024);
         // <s>
-        std::array<char, 512> s;       //0x7C2138
+        CharArray<512> s;              //0x7C2138
         // <p>
-        std::array<char, 512> p;       //0x7C2338
+        CharArray<512> p;              //0x7C2338
         // <i>
-        std::array<char, 512> i;       //0x7C2538
+        CharArray<512> i;              //0x7C2538
         // 0x7C2738
         PAD(4);
         // <v>
@@ -255,7 +258,7 @@ namespace shaiya
         int socket;                    //0x22FA304
         PAD(21368);
         // 0x22FF680
-        std::array<char, MAX_PATH> exeFileName;
+        CharArray<MAX_PATH> exeFileName;
         // 0x22FF784
         PAD(708);
         HMODULE hModule;               //0x22FFA48

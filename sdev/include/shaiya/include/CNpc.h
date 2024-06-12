@@ -1,18 +1,15 @@
 #pragma once
-#include <array>
 #include "include/shaiya/common.h"
 #include "include/shaiya/include/NpcType.h"
 
 namespace shaiya
 {
-    using NpcName = std::array<char, 50>;
-
     #pragma pack(push, 1)
     // 0049AB60 ctor
     struct CNpc
     {
         PAD(4);
-        NpcName name;           //0x04
+        CharArray<50> name;     //0x04
         PAD(2);
         D3DVECTOR pos;          //0x38
         D3DVECTOR dir;          //0x44

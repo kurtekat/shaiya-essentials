@@ -1,5 +1,4 @@
 #pragma once
-#include <array>
 #include "include/shaiya/common.h"
 #include "include/shaiya/include/Country.h"
 #include "include/shaiya/include/MotionType.h"
@@ -8,9 +7,6 @@
 namespace shaiya
 {
     struct CMonster;
-
-    using Clothes = std::array<UINT32, 6>;
-    using ShapeName = std::array<char, 51>;
 
     enum struct CharacterActionType : UINT32
     {
@@ -42,7 +38,7 @@ namespace shaiya
         UINT32 headModel;             //0x4C
         PAD(92);
         BOOL enableClothes;           //0xAC
-        Clothes clothes;              //0xB0
+        Array<UINT32, 6> clothes;     //0xB0
         // 0xC8
         PAD(32);
         MotionType32 motionType1;     //0xE8
@@ -51,8 +47,8 @@ namespace shaiya
         // 0xF8
         CharacterActionType actionType;
         PAD(16);
-        CharName charName;            //0x10C
-        ShapeName shapeName;          //0x121
+        CharArray<21> charName;       //0x10C
+        CharArray<51> shapeName;      //0x121
         PAD(4);
         UINT32 health;                //0x158
         UINT32 maxHealth;             //0x15C

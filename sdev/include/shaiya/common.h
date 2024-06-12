@@ -23,16 +23,15 @@
 namespace shaiya
 {
     using Packet = UINT8*;
-    using ChatMessage = std::array<char, 128>;
+
+    template<class T, size_t N>
+    using Array = std::array<T, N>;
+
+    template<size_t N>
+    using CharArray = std::array<char, N>;
 
     using CharId = ULONG;
-    using CharName = std::array<char, 21>;
-    using GuildName = std::array<char, 25>;
-
     using UserId = ULONG;
-    using Username = std::array<char, 32>;
-    using Password = std::array<char, 32>;
-
     using ItemId = UINT32;
     using CraftName = std::array<char, 21>;
     using Gems = std::array<UINT8, 6>;
