@@ -12,7 +12,7 @@ namespace shaiya
         // 0x2C
         LPDIRECT3DBASETEXTURE9 texture;
         PAD(28);
-        UINT8 bar;       //0x4C
+        UINT8 bag;       //0x4C
         UINT8 srcSlot;   //0x4D
         PAD(2);
         BOOL mouseOver;  //0x50

@@ -55,10 +55,9 @@ namespace quick_slot
         if (block)
         {
             g_pQuickSlot3 = CQuickSlot::Init(block.release(), 2);
-            g_pQuickSlot3->bar = 2;
+            g_pQuickSlot3->bag = 2;
             g_pQuickSlot3->window.visible = false;
-
-            g_static->global.quickSlot3Bar = 2;
+            g_static->global.quickSlot3Bag = 2;
 
             get_config(unknown, g_pQuickSlot3);
             unknown->quickSlot3 = g_pQuickSlot3;
