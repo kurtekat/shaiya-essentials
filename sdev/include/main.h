@@ -16,9 +16,9 @@ namespace hook
     void vehicle();
 }
 
-inline int g_showCostume = false;
-inline int g_showPet = false;
+inline int g_showCostumes = false;
+inline int g_showPets = false;
 inline int g_showWings = false;
-inline int g_showEft = false;
-inline int g_showMobEft = false;
+inline int g_showEffects = false;
+inline int g_showMobEffects = false;
 inline float g_cameraLimit = 30.0f;

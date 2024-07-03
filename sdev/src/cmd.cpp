@@ -8,20 +8,21 @@
 #include "include/static.h"
 using namespace shaiya;
 
-void get_global_config()
+void load_advanced_config()
 {
-    auto value = GetPrivateProfileIntA("INTERFACE", "SHOW_COSTUME", 1, g_static->iniFileName.data());
-    g_showCostume = value ? true : false;
+    std::string str(MAX_PATH, 0);
+    GetPrivateProfileStringA("ADVANCED", "COSTUMES", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
+    g_showCostumes = str.compare(0, 4, "TRUE") == 0 ? true : false;
 
-    value = GetPrivateProfileIntA("INTERFACE", "SHOW_WINGS", 1, g_static->iniFileName.data());
-    g_showWings = value ? true : false;
+    GetPrivateProfileStringA("ADVANCED", "WINGS", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
+    g_showWings = str.compare(0, 4, "TRUE") == 0 ? true : false;
 
-    value = GetPrivateProfileIntA("INTERFACE", "SHOW_EFT", 1, g_static->iniFileName.data());
-    g_showEft = value ? true : false;
+    GetPrivateProfileStringA("ADVANCED", "EFFECTS", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
+    g_showEffects = str.compare(0, 4, "TRUE") == 0 ? true : false;
 
-    value = GetPrivateProfileIntA("INTERFACE", "SHOW_PET", 1, g_static->iniFileName.data());
-    g_showPet = value ? true : false;
-    g_showMobEft = g_showPet;
+    GetPrivateProfileStringA("ADVANCED", "PETS", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
+    g_showPets = str.compare(0, 4, "TRUE") == 0 ? true : false;
+    g_showMobEffects = g_showPets;
 }
 
 int command_handler(char* text)
@@ -37,83 +38,84 @@ int command_handler(char* text)
 
     auto argc = argv.size();
 
-    if (iss.str() == "/eft on")
+    if (iss.str() == "/effects on")
     {
-        g_showEft = true;
-        g_showMobEft = true;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_EFT", "1", g_static->iniFileName.data());
+        g_showEffects = true;
+        g_showMobEffects = true;
+        WritePrivateProfileStringA("ADVANCED", "EFFECTS", "TRUE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/eft off")
+    if (iss.str() == "/effects off")
     {
-        g_showEft = false;
-        g_showMobEft = false;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_EFT", "0", g_static->iniFileName.data());
+        g_showEffects = false;
+        g_showMobEffects = false;
+        WritePrivateProfileStringA("ADVANCED", "EFFECTS", "FALSE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/pet on")
+    if (iss.str() == "/pets on")
     {
-        g_showMobEft = true;
-        g_showPet = true;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_PET", "1", g_static->iniFileName.data());
+        g_showMobEffects = true;
+        g_showPets = true;
+        WritePrivateProfileStringA("ADVANCED", "PETS", "TRUE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/pet off")
+    if (iss.str() == "/pets off")
     {
-        g_showMobEft = false;
-        g_showPet = false;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_PET", "0", g_static->iniFileName.data());
+        g_showMobEffects = false;
+        g_showPets = false;
+        WritePrivateProfileStringA("ADVANCED", "PETS", "FALSE", g_var->iniFileName.data());
         return 0;
     }
 
     if (iss.str() == "/wings on")
     {
         g_showWings = true;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_WINGS", "1", g_static->iniFileName.data());
+        WritePrivateProfileStringA("ADVANCED", "WINGS", "TRUE", g_var->iniFileName.data());
         return 0;
     }
 
     if (iss.str() == "/wings off")
     {
         g_showWings = false;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_WINGS", "0", g_static->iniFileName.data());
+        WritePrivateProfileStringA("ADVANCED", "WINGS", "FALSE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/costume on")
+    if (iss.str() == "/costumes on")
     {
-        g_showCostume = true;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_COSTUME", "1", g_static->iniFileName.data());
+        g_showCostumes = true;
+        WritePrivateProfileStringA("ADVANCED", "COSTUMES", "TRUE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/costume off")
+    if (iss.str() == "/costumes off")
     {
-        g_showCostume = false;
-        WritePrivateProfileStringA("INTERFACE", "SHOW_COSTUME", "0", g_static->iniFileName.data());
+        g_showCostumes = false;
+        WritePrivateProfileStringA("ADVANCED", "COSTUMES", "FALSE", g_var->iniFileName.data());
         return 0;
     }
 
     return 1;
 }
 
-unsigned u0x406140 = 0x406140;
-void __declspec(naked) naked_0x40613A()
+unsigned u0x406110 = 0x406110;
+unsigned u0x4094B2 = 0x4094B2;
+void __declspec(naked) naked_0x4094AD()
 {
     __asm 
     {
         pushad
 
-        call get_global_config
+        call load_advanced_config
 
         popad
 
         // original
-        mov edi,dword ptr ds:[0x746348]
-        jmp u0x406140
+        call u0x406110
+        jmp u0x4094B2
     }
 }
 
@@ -148,7 +150,7 @@ void __declspec(naked) naked_0x416343()
 {
     __asm 
     {
-        cmp dword ptr[g_showCostume],0x1
+        cmp dword ptr[g_showCostumes],0x1
         jne label
 
         // original
@@ -176,7 +178,7 @@ void __declspec(naked) naked_0x59F08B()
         jmp u0x59F092
 
         label:
-        cmp dword ptr[g_showCostume],0x1
+        cmp dword ptr[g_showCostumes],0x1
         jne _0x59F4BA
         jmp original
 
@@ -190,7 +192,7 @@ void __declspec(naked) naked_0x459120()
 {
     __asm 
     {
-        cmp dword ptr[g_showEft],0x1
+        cmp dword ptr[g_showEffects],0x1
         je _original
 
         retn 0x18
@@ -207,7 +209,7 @@ void __declspec(naked) naked_0x43A300()
 {
     __asm 
     {
-        cmp dword ptr[g_showEft],0x1
+        cmp dword ptr[g_showEffects],0x1
         je _original
 
         retn 0x18
@@ -224,7 +226,7 @@ void __declspec(naked) naked_0x41A2C0()
 {
     __asm 
     {
-        cmp dword ptr[g_showEft],0x1
+        cmp dword ptr[g_showEffects],0x1
         je _original
 
         retn 0x1C
@@ -242,9 +244,9 @@ void __declspec(naked) naked_0x43A142()
 {
     __asm 
     {
-        cmp dword ptr[g_showMobEft],0x0
+        cmp dword ptr[g_showMobEffects],0x0
         je _0x43A2FA
-        cmp dword ptr[g_showEft],0x1
+        cmp dword ptr[g_showEffects],0x1
         je _original
 
         _0x43A2FA:
@@ -266,7 +268,7 @@ void __declspec(naked) naked_0x4182FF()
         // original
         mov eax,[ebx+0x430]
 
-        cmp dword ptr[g_showPet],0x1
+        cmp dword ptr[g_showPets],0x1
         jne _0x4184CF
         jmp u0x418305
 
@@ -297,7 +299,7 @@ void __declspec(naked) naked_0x41F816()
 void hook::cmd()
 {
     // get client config
-    util::detour((void*)0x40613A, naked_0x40613A, 6);
+    util::detour((void*)0x4094AD, naked_0x4094AD, 5);
     // commands
     util::detour((void*)0x4867A1, naked_0x4867A1, 5);
     // show or hide costumes
