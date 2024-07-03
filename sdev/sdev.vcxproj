@@ -22,8 +22,11 @@
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\shaiya\common.h" />
     <ClInclude Include="include\shaiya\include\BillingItem.h" />
+    <ClInclude Include="include\shaiya\include\CCharacterChat.h" />
     <ClInclude Include="include\shaiya\include\CDataFile.h" />
+    <ClInclude Include="include\shaiya\include\CPlayerData.h" />
     <ClInclude Include="include\shaiya\include\CQuickSlot.h" />
+    <ClInclude Include="include\shaiya\include\CStaticText.h" />
     <ClInclude Include="include\shaiya\include\CWindow.h" />
     <ClInclude Include="include\shaiya\include\ShaiyaColor.h" />
     <ClInclude Include="include\shaiya\include\Country.h" />
@@ -34,7 +37,6 @@
     <ClInclude Include="include\shaiya\include\CNetwork.h" />
     <ClInclude Include="include\shaiya\include\CNpc.h" />
     <ClInclude Include="include\shaiya\include\CWorldMgr.h" />
-    <ClInclude Include="include\shaiya\include\ExtDuration.h" />
     <ClInclude Include="include\shaiya\include\ItemEffect.h" />
     <ClInclude Include="include\shaiya\include\ItemInfo.h" />
     <ClInclude Include="include\shaiya\include\ItemType.h" />
@@ -54,6 +56,7 @@
     <ClCompile Include="include\shaiya\src\CDataFile.cpp" />
     <ClCompile Include="include\shaiya\src\CNetwork.cpp" />
     <ClCompile Include="include\shaiya\src\CQuickSlot.cpp" />
+    <ClCompile Include="include\shaiya\src\CStaticText.cpp" />
     <ClCompile Include="include\shaiya\src\CWindow.cpp" />
     <ClCompile Include="include\shaiya\src\CWorldMgr.cpp" />
     <ClCompile Include="src\camera_limit.cpp" />

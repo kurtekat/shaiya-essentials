@@ -28,7 +28,7 @@ namespace name_color
 
     ShaiyaColor get_by_lv_gap(int level)
     {
-        int gap = level - g_static->global.level;
+        int gap = level - g_pPlayerData->level;
         if (gap >= 10)
             return ShaiyaColor::Gray;
 

@@ -6,7 +6,9 @@
 
 namespace shaiya
 {
+    struct CCharacterChat;
     struct CMonster;
+    struct SStaticText;
 
     enum struct CharacterActionType : UINT32
     {
@@ -37,15 +39,15 @@ namespace shaiya
         UINT32 faceModel;             //0x48
         UINT32 headModel;             //0x4C
         PAD(92);
-        BOOL enableClothes;           //0xAC
-        Array<UINT32, 6> clothes;     //0xB0
+        BOOL enableCostume;           //0xAC
+        Array<UINT32, 6> costume;     //0xB0
         // 0xC8
         PAD(32);
         MotionType32 motionType1;     //0xE8
         MotionType32 motionType2;     //0xEC
         PAD(8);
         // 0xF8
-        CharacterActionType actionType;
+        CharacterActionType actionType1;
         PAD(16);
         CharArray<21> charName;       //0x10C
         CharArray<51> shapeName;      //0x121
@@ -79,7 +81,7 @@ namespace shaiya
         PAD(5);
         UINT8 vehicleType;            //0x1B5
         UINT8 petType;                //0x1B6
-        UINT8 clothesType;            //0x1B7
+        UINT8 costumeType;            //0x1B7
         UINT8 wingsType;              //0x1B8
         UINT8 helmetTypeId;           //0x1B9
         UINT8 upperTypeId;            //0x1BA
@@ -92,7 +94,7 @@ namespace shaiya
         PAD(5);
         UINT8 vehicleTypeId;          //0x1C6
         UINT8 petTypeId;              //0x1C7
-        UINT8 clothesTypeId;          //0x1C8
+        UINT8 costumeTypeId;          //0x1C8
         UINT8 wingsTypeId;            //0x1C9
         PAD(18);
         DWORD attackTime;             //0x1DC
@@ -107,7 +109,11 @@ namespace shaiya
         UINT16 targetDmgMP;           //0x1F4
         PAD(6);
         UINT8 attackResult;           //0x1FC
-        PAD(184);
+        PAD(139);
+        CCharacterChat* chatBalloon;  //0x288
+        // 0x747538 5.0 (seconds)
+        float chatBalloonTimer;       //0x28C
+        PAD(37);
         UINT8 attackSpeed;            //0x2B5
         UINT8 moveSpeed;              //0x2B6
         Country country;              //0x2B7
@@ -122,10 +128,14 @@ namespace shaiya
         PAD(31);
         char* guildName;              //0x30C
         ULONG guildId;                //0x310
-        PAD(32);
+        SStaticText* charNameText;    //0x314
+        long charNamePointX;          //0x318
+        SStaticText* guildNameText;   //0x31C
+        long guildNamePointX;         //0x320
+        PAD(16);
         UINT32 kills;                 //0x334
         PAD(136);
-        UINT8 vehicleSeats;           //0x3C0
+        UINT8 vehicleSeatCount;       //0x3C0
         UINT8 vehicleModel;           //0x3C1
         PAD(2);
         UINT32 vehicleSpeed;          //0x3C4

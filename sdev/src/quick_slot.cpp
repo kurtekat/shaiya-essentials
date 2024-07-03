@@ -17,9 +17,9 @@ namespace quick_slot
 {
     void get_config(Unknown* unknown, CQuickSlot* quickSlot)
     {
-        auto section = std::format("INTERFACE_{}X{}", g_static->viewport.Width, g_static->viewport.Height);
-        int x = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_X", 0, g_static->iniFileName.data());
-        int y = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_Y", 0, g_static->iniFileName.data());
+        auto section = std::format("INTERFACE_{}X{}", g_var->viewport.Width, g_var->viewport.Height);
+        int x = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_X", 0, g_var->iniFileName.data());
+        int y = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_Y", 0, g_var->iniFileName.data());
 
         quickSlot->window.pos.x = x;
         quickSlot->window.pos.y = y;
@@ -27,24 +27,24 @@ namespace quick_slot
         if (!unknown->quickSlot1->plus)
             return;
 
-        int plus = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT2_PLUS", 0, g_static->iniFileName.data());
+        int plus = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT2_PLUS", 0, g_var->iniFileName.data());
         unknown->quickSlot2->plus = plus ? true : false;
         g_pQuickSlot3->window.visible = unknown->quickSlot2->plus ? true : false;
     }
 
     void set_config(CQuickSlot* quickSlot)
     {
-        auto section = std::format("INTERFACE_{}X{}", g_static->viewport.Width, g_static->viewport.Height);
+        auto section = std::format("INTERFACE_{}X{}", g_var->viewport.Width, g_var->viewport.Height);
         auto x = std::to_string(g_pQuickSlot3->window.pos.x);
         auto y = std::to_string(g_pQuickSlot3->window.pos.y);
 
-        WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_X", x.c_str(), g_static->iniFileName.data());
-        WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_Y", y.c_str(), g_static->iniFileName.data());
+        WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_X", x.c_str(), g_var->iniFileName.data());
+        WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_Y", y.c_str(), g_var->iniFileName.data());
 
         if (quickSlot->id == 1)
         {
             std::string value = quickSlot->plus ? "1" : "0";
-            WritePrivateProfileStringA(section.c_str(), "QUICKSLOT2_PLUS", value.c_str(), g_static->iniFileName.data());
+            WritePrivateProfileStringA(section.c_str(), "QUICKSLOT2_PLUS", value.c_str(), g_var->iniFileName.data());
         }
     }
 
@@ -57,7 +57,7 @@ namespace quick_slot
             g_pQuickSlot3 = CQuickSlot::Init(block.release(), 2);
             g_pQuickSlot3->bag = 2;
             g_pQuickSlot3->window.visible = false;
-            g_static->global.quickSlot3Bag = 2;
+            g_pPlayerData->quickSlot3Bag = 2;
 
             get_config(unknown, g_pQuickSlot3);
             unknown->quickSlot3 = g_pQuickSlot3;

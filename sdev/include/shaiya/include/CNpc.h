@@ -4,6 +4,8 @@
 
 namespace shaiya
 {
+    struct SStaticText;
+
     #pragma pack(push, 1)
     // 0049AB60 ctor
     struct CNpc
@@ -24,7 +26,12 @@ namespace shaiya
         D3DVECTOR movePos;      //0x8C
         D3DVECTOR moveDir;      //0x98
         UINT32 model;           //0xA4
-        PAD(132);
+        PAD(100);
+        SStaticText* typeText;  //0x10C
+        long typePointX;        //0x110
+        SStaticText* nameText;  //0x114
+        long namePointX;        //0x118
+        PAD(16);
         // 0x12C
     };
     #pragma pack(pop)

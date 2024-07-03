@@ -2,7 +2,9 @@
 #include <util/util.h>
 #include "include/main.h"
 #include "include/static.h"
+#include "include/shaiya/include/Country.h"
 #include "include/shaiya/include/CNetwork.h"
+#include "include/shaiya/include/CPlayerData.h"
 #include "include/shaiya/include/NpcType.h"
 using namespace shaiya;
 
@@ -24,7 +26,7 @@ enum HelpMenuButtonIndex
 void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
 {
     // should not allow two windows at once
-    if (g_static->global.windowType != WindowType::None)
+    if (g_pPlayerData->windowType != WindowType::None)
     {
         Static::GetMsg(31, 806, 12);
         return;
@@ -34,102 +36,102 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
     case BasicPlay:
     {
-        g_static->global.npcType = NpcType32::Blacksmith;
-        g_static->global.npcTypeId = 40;
-        g_static->global.npcIcon = 55;
-        g_static->global.textBuf[0] = '\0';
-        g_static->global.windowType = WindowType::Blacksmith;
+        g_pPlayerData->npcType = NpcType32::Blacksmith;
+        g_pPlayerData->npcTypeId = 40;
+        g_pPlayerData->npcIcon = 55;
+        g_pPlayerData->textBuf[0] = '\0';
+        g_pPlayerData->windowType = WindowType::Blacksmith;
         break;
     }
     case PlayGuide:
     {
-        g_static->global.npcType = NpcType32::Merchant;
-        g_static->global.npcTypeId = 248;
-        g_static->global.npcIcon = 55;
-        g_static->global.textBuf[0] = '\0';
-        g_static->global.windowType = WindowType::Recreation;
+        g_pPlayerData->npcType = NpcType32::Merchant;
+        g_pPlayerData->npcTypeId = 248;
+        g_pPlayerData->npcIcon = 55;
+        g_pPlayerData->textBuf[0] = '\0';
+        g_pPlayerData->windowType = WindowType::Recreation;
         break;
     }
     case Interface:
     {
-        if (g_static->global.country == Country::Light)
+        if (g_pPlayerData->country == Country::Light)
         {
             uint16_t packet{ 0x218 };
             CNetwork::Send(&packet, 2);
 
-            g_static->killLv = 0;
-            g_static->deathLv = 0;
+            g_var->killLv = 0;
+            g_var->deathLv = 0;
 
-            g_static->global.npcType = NpcType32::VetManager;
-            g_static->global.npcTypeId = 1;
-            g_static->global.npcIcon = 55;
-            g_static->global.textBuf[0] = '\0';
+            g_pPlayerData->npcType = NpcType32::VetManager;
+            g_pPlayerData->npcTypeId = 1;
+            g_pPlayerData->npcIcon = 55;
+            g_pPlayerData->textBuf[0] = '\0';
         }
         else
         {
             uint16_t packet{ 0x218 };
             CNetwork::Send(&packet, 2);
 
-            g_static->killLv = 0;
-            g_static->deathLv = 0;
+            g_var->killLv = 0;
+            g_var->deathLv = 0;
 
-            g_static->global.npcType = NpcType32::VetManager;
-            g_static->global.npcTypeId = 2;
-            g_static->global.npcIcon = 55;
-            g_static->global.textBuf[0] = '\0';
+            g_pPlayerData->npcType = NpcType32::VetManager;
+            g_pPlayerData->npcTypeId = 2;
+            g_pPlayerData->npcIcon = 55;
+            g_pPlayerData->textBuf[0] = '\0';
         }
 
         break;
     }
     case Blessing:
     {
-        if (g_static->global.country == Country::Light)
+        if (g_pPlayerData->country == Country::Light)
         {
-            g_static->global.npcType = NpcType32::Merchant;
-            g_static->global.npcTypeId = 179;
-            g_static->global.npcIcon = 55;
-            g_static->global.textBuf[0] = '\0';
-            g_static->global.windowType = WindowType::BankTeller;
+            g_pPlayerData->npcType = NpcType32::Merchant;
+            g_pPlayerData->npcTypeId = 179;
+            g_pPlayerData->npcIcon = 55;
+            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->windowType = WindowType::BankTeller;
         }
         else
         {
-            g_static->global.npcType = NpcType32::Merchant;
-            g_static->global.npcTypeId = 180;
-            g_static->global.npcIcon = 55;
-            g_static->global.textBuf[0] = '\0';
-            g_static->global.windowType = WindowType::BankTeller;
+            g_pPlayerData->npcType = NpcType32::Merchant;
+            g_pPlayerData->npcTypeId = 180;
+            g_pPlayerData->npcIcon = 55;
+            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->windowType = WindowType::BankTeller;
         }
 
         break;
     }
     case BasicAction:
     {
-        if (g_static->global.country == Country::Light)
+        if (g_pPlayerData->country == Country::Light)
         {
-            g_static->global.npcType = NpcType32::GuildMaster;
-            g_static->global.npcTypeId = 1;
-            g_static->global.npcIcon = 55;
-            g_static->global.textBuf[0] = '\0';
-            g_static->global.windowType = WindowType::GuildMaster;
+            g_pPlayerData->npcType = NpcType32::GuildMaster;
+            g_pPlayerData->npcTypeId = 1;
+            g_pPlayerData->npcIcon = 55;
+            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->windowType = WindowType::GuildMaster;
         }
         else
         {
-            g_static->global.npcType = NpcType32::GuildMaster;
-            g_static->global.npcTypeId = 2;
-            g_static->global.npcIcon = 55;
-            g_static->global.textBuf[0] = '\0';
-            g_static->global.windowType = WindowType::GuildMaster;
+            g_pPlayerData->npcType = NpcType32::GuildMaster;
+            g_pPlayerData->npcTypeId = 2;
+            g_pPlayerData->npcIcon = 55;
+            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->windowType = WindowType::GuildMaster;
         }
 
         break;
     }
     case PlayMode:
     {
-        g_static->global.npcType = NpcType32::Merchant;
-        g_static->global.npcTypeId = 437;
-        g_static->global.npcIcon = 55;
-        g_static->global.textBuf[0] = '\0';
-        g_static->global.windowType = WindowType::Merchant;
+        g_pPlayerData->npcType = NpcType32::Merchant;
+        g_pPlayerData->npcTypeId = 437;
+        g_pPlayerData->npcIcon = 55;
+        g_pPlayerData->textBuf[0] = '\0';
+        g_pPlayerData->windowType = WindowType::Merchant;
         break;
     }
     default:

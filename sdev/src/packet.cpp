@@ -13,10 +13,10 @@ namespace packet
         if (!user->petType)
             user->pet = nullptr;
 
-        if (!user->clothesType)
+        if (!user->costumeType)
         {
-            user->enableClothes = 0;
-            user->clothes.fill(-1);
+            user->enableCostume = 0;
+            user->costume.fill(-1);
         }
 
         if (!user->wingsType)
@@ -25,18 +25,18 @@ namespace packet
 
     void revenge_message(CCharacter* killer, uint32_t killCount)
     {
-        StringCbCopyA(g_static->t.data(), g_static->t.size(), killer->charName.data());
-        g_static->v = killCount;
+        StringCbCopyA(g_var->t.data(), g_var->t.size(), killer->charName.data());
+        g_var->v = killCount;
         Static::GetMsg(5, 509, 1);
     }
 
     void check_add_money(uint32_t money)
     {
         constexpr auto max_money = UINT_MAX;
-        if (money > (max_money - g_static->global.money))
-            g_static->global.money = max_money;
+        if (money > (max_money - g_pPlayerData->money))
+            g_pPlayerData->money = max_money;
         else
-            g_static->global.money += money;
+            g_pPlayerData->money += money;
     }
 }
 
