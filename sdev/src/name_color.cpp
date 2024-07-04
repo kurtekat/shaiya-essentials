@@ -10,25 +10,6 @@ using namespace shaiya;
 
 namespace name_color
 {
-    const std::map<int, ShaiyaColor> g_levelGapToColor
-    {
-        { 9, ShaiyaColor::Pink },
-        { 8, ShaiyaColor::Pink },
-        { 7, ShaiyaColor::Red },
-        { 6, ShaiyaColor::Red },
-        { 5, ShaiyaColor::Orange },
-        { 4, ShaiyaColor::Orange },
-        { 3, ShaiyaColor::Yellow },
-        { 2, ShaiyaColor::Yellow },
-        { 1, ShaiyaColor::Green },
-        { 0, ShaiyaColor::Green },
-        { -1, ShaiyaColor::Green },
-        { -2, ShaiyaColor::Blue },
-        { -3, ShaiyaColor::Blue },
-        { -4, ShaiyaColor::LightBlue },
-        { -5, ShaiyaColor::LightBlue }
-    };
-
     const std::map<uint16_t, ShaiyaColor> g_itemRangeToColor
     {
         { 1, ShaiyaColor::LightBlue },
@@ -37,8 +18,10 @@ namespace name_color
         { 4, ShaiyaColor::Yellow },
         { 5, ShaiyaColor::Orange },
         { 6, ShaiyaColor::Red },
-        { 7, ShaiyaColor::Purple },
-        { 8, ShaiyaColor::Gray }
+        { 7, ShaiyaColor::Pink },
+        { 8, ShaiyaColor::Purple },
+        { 9, ShaiyaColor::Gray },
+        { 10, ShaiyaColor::Black }
     };
 
     ShaiyaColor get_mob_name_color(int mobLevel)
@@ -47,10 +30,24 @@ namespace name_color
         if (gap >= 10)
             return ShaiyaColor::Gray;
 
-        for (const auto& [diff, color] : g_levelGapToColor)
+        switch (gap)
         {
-            if (diff == gap)
-                return color;
+        case 9: case 8:
+            return ShaiyaColor::Pink;
+        case 7: case 6:
+            return ShaiyaColor::Red;
+        case 5: case 4:
+            return ShaiyaColor::Orange;
+        case 3: case 2:
+            return ShaiyaColor::Yellow;
+        case 1: case 0: case -1:
+            return ShaiyaColor::Green;
+        case -2: case -3:
+            return ShaiyaColor::Blue;
+        case -4: case -5:
+            return ShaiyaColor::LightBlue;
+        default:
+            break;
         }
 
         return ShaiyaColor::White;
