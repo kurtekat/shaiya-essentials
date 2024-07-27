@@ -159,4 +159,10 @@ void hook::gui()
     util::write_memory((void*)0x583DED, 0x75, 1);
     // pet/wing lag workaround
     util::write_memory((void*)0x5881EE, 0x85, 1);
+    // display the actual exp amount (not x10)
+    util::write_memory((void*)0x4963DE, 0x02, 1);
+    util::write_memory((void*)0x496407, 0x02, 1);
+    util::write_memory((void*)0x529D05, 0x02, 1);
+    util::write_memory((void*)0x529E19, 0x02, 1);
+    util::write_memory((void*)0x594BA7, 0x02, 1);
 }
