@@ -147,7 +147,7 @@ void hook::gui()
     util::write_memory((void*)0x463FE0, 0x07, 1);
     // speed recreation
     util::write_memory((void*)0x4C4D2F, 0x02, 1);
-    // speed enhance
+    // speed enchant
     util::write_memory((void*)0x501600, 0x02, 1);
     util::write_memory((void*)0x501602, 0x02, 1);
     util::write_memory((void*)0x501631, 0x02, 1);
@@ -159,10 +159,14 @@ void hook::gui()
     util::write_memory((void*)0x583DED, 0x75, 1);
     // pet/wing lag workaround
     util::write_memory((void*)0x5881EE, 0x85, 1);
-    // display the actual exp amount (not x10)
-    util::write_memory((void*)0x4963DE, 0x02, 1);
-    util::write_memory((void*)0x496407, 0x02, 1);
-    util::write_memory((void*)0x529D05, 0x02, 1);
-    util::write_memory((void*)0x529E19, 0x02, 1);
-    util::write_memory((void*)0x594BA7, 0x02, 1);
+    // pass false to a function that appends '0' 
+    // to exp text if said parameter is true
+    util::write_memory((void*)0x4963DE, 0x00, 1);
+    util::write_memory((void*)0x496407, 0x00, 1);
+    util::write_memory((void*)0x529D05, 0x00, 1);
+    util::write_memory((void*)0x529E19, 0x00, 1);
+    util::write_memory((void*)0x594BA7, 0x00, 1);
+    // ignore exp multiplication
+    // note: does not affect locale 0 or 1 (different math)
+    util::write_memory((void*)0x4FA494, 0x44, 1);
 }
