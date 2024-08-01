@@ -21,7 +21,59 @@ namespace name_color
         { 7, ShaiyaColor::Pink },
         { 8, ShaiyaColor::Purple },
         { 9, ShaiyaColor::Gray },
-        { 10, ShaiyaColor::Black }
+        { 10, ShaiyaColor::Black },
+        { 11, ShaiyaColor::Cyan },
+        { 12, ShaiyaColor::Magenta },
+        { 13, ShaiyaColor::Brown },
+        { 14, ShaiyaColor::Lime },
+        { 15, ShaiyaColor::Olive },
+        { 16, ShaiyaColor::Maroon },
+        { 17, ShaiyaColor::Navy },
+        { 18, ShaiyaColor::Teal },
+        { 19, ShaiyaColor::Silver },
+        { 20, ShaiyaColor::Gold },
+        { 21, ShaiyaColor::Crimson },
+        { 22, ShaiyaColor::Khaki },
+        { 23, ShaiyaColor::Lavender },
+        { 24, ShaiyaColor::Peach },
+        { 25, ShaiyaColor::Coral },
+        { 26, ShaiyaColor::Salmon },
+        { 27, ShaiyaColor::Mint },
+        { 28, ShaiyaColor::Beige },
+        { 29, ShaiyaColor::Plum },
+        { 30, ShaiyaColor::Orchid },
+        { 31, ShaiyaColor::Rose },
+        { 32, ShaiyaColor::Wheat },
+        { 33, ShaiyaColor::Azure },
+        { 34, ShaiyaColor::Ivory },
+        { 35, ShaiyaColor::Snow },
+        { 36, ShaiyaColor::Honeydew },
+        { 37, ShaiyaColor::LimeGreen },
+        { 38, ShaiyaColor::LightCoral },
+        { 39, ShaiyaColor::LightPink },
+        { 40, ShaiyaColor::SeaGreen },
+        { 41, ShaiyaColor::SkyBlue },
+        { 42, ShaiyaColor::SlateGray },
+        { 43, ShaiyaColor::Turquoise },
+        { 44, ShaiyaColor::VioletRed },
+        { 45, ShaiyaColor::SpringGreen },
+        { 46, ShaiyaColor::Chartreuse },
+        { 47, ShaiyaColor::Sienna },
+        { 48, ShaiyaColor::SlateBlue },
+        { 49, ShaiyaColor::SteelBlue },
+        { 50, ShaiyaColor::Tomato },
+        { 51, ShaiyaColor::DarkRed },
+        { 52, ShaiyaColor::DarkOrange },
+        { 53, ShaiyaColor::DarkViolet },
+        { 54, ShaiyaColor::LightYellow },
+        { 55, ShaiyaColor::LightCyan },
+        { 56, ShaiyaColor::PapayaWhip },
+        { 57, ShaiyaColor::Moccasin },
+        { 58, ShaiyaColor::NavajoWhite },
+        { 59, ShaiyaColor::LemonChiffon },
+        { 60, ShaiyaColor::MistyRose }
+
+
     };
 
     ShaiyaColor get_mob_name_color(int mobLevel)
@@ -128,3 +180,4 @@ void hook::name_color()
     // users
     util::detour((void*)0x45381B, naked_0x45381B, 6);
 }
+
