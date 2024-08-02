@@ -168,5 +168,5 @@ void hook::gui()
     util::write_memory((void*)0x594BA7, 0x00, 1);
     // ignore exp multiplication
     // note: does not affect locale 0 or 1 (different math)
-    util::write_memory((void*)0x4FA494, 0x44, 1);
+    util::write_memory((void*)0x4F9851, 0x00, 1);
 }
