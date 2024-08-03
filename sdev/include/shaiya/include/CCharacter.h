@@ -24,6 +24,14 @@ namespace shaiya
     };
 
     #pragma pack(push, 1)
+    struct CharacterTitle
+    {
+        SStaticText* text;
+        long pointX;
+    };
+    #pragma pack(pop)
+
+    #pragma pack(push, 1)
     // 00419800 ctor
     struct CCharacter
     {
@@ -147,6 +155,9 @@ namespace shaiya
         CMonster* wings;              //0x434
         PAD(4);
         // 0x43C
+
+        // custom
+        CharacterTitle title;         //0x43C
     };
     #pragma pack(pop)
 }
