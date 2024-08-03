@@ -18,97 +18,217 @@ namespace title
         int color = 0xFFFFFFFF;
         const int effectDataId = 280;
 
-        if (!user->pet)
+        if (!user->mantleType)
             return;
 
-        auto itemInfo = CDataFile::GetItemInfo(user->petType, user->petTypeId);
+        auto itemInfo = CDataFile::GetItemInfo(user->mantleType, user->mantleTypeId);
         if (!itemInfo)
             return;
 
         auto itemId = (itemInfo->type * 1000) + itemInfo->typeId;
 
-        switch (itemId) {
-        case 120001:
-            text = "Champion of Shaiya";
-            color = 0xFFFF0000;
-            break;
-        case 120002:
-            text = "Test2";
-            color = 0xFF00FF00;
-            break;
-        case 120003:
-            text = "Test3";
-            color = 0xFF0000FF;
-            break;
-        case 120004:
-            text = "Test4";
-            color = 0xFFFFFF00;
-            break;
-        case 120005:
-            text = "Test5";
-            color = 0xFF00FFFF;
-            break;
-        case 120006:
-            text = "Test6";
-            color = 0xFFFF00FF;
-            break;
-        case 120007:
-            text = "Test7";
-            color = 0xFF800000;
-            break;
-        case 120008:
-            text = "Test8";
-            color = 0xFF008000;
-            break;
-        case 120009:
-            text = "Test9";
-            color = 0xFF000080;
-            break;
-        case 120010:
-            text = "Test10";
-            color = 0xFF808000;
-            break;
-        case 120011:
-            text = "Test11";
-            color = 0xFF800080;
-            break;
-        case 120012:
-            text = "Test12";
-            color = 0xFFC0C0C0;
-            break;
-        case 120013:
-            text = "Test13";
-            color = 0xFF808080;
-            break;
-        case 120014:
-            text = "Test14";
-            color = 0xFF400040;
-            break;
-        case 120015:
-            text = "Test15";
-            color = 0xFF004080;
-            break;
-        case 120016:
-            text = "Test16";
-            color = 0xFF008080;
-            break;
-        case 120017:
-            text = "Test17";
-            color = 0xFF800000;
-            break;
-        case 120018:
-            text = "Test18";
-            color = 0xFF008000;
-            break;
-        case 120019:
-            text = "Test19";
-            color = 0xFF000080;
-            break;
-        case 120020:
-            text = "Test20";
-            color = 0xFFFFA500;
-            break;
-        default:
+switch (itemId) {
+    case 24028:
+        text = "Champion of Teos";
+        color = 0xFFFF0000; // Red
+        break;
+    case 24029:
+        text = "Gladiator";
+        color = 0xFF00FF00; // Green
+        break;
+    case 24030:
+        text = "Protector";
+        color = 0xFF0000FF; // Blue
+        break;
+    case 24031:
+        text = "Archimage";
+        color = 0xFFFFFF00; // Yellow
+        break;
+    case 24032:
+        text = "Hawk Eye";
+        color = 0xFF00FFFF; // Aqua
+        break;
+    case 24033:
+        text = "Outlaw";
+        color = 0xFFFF00FF; // Fuchsia
+        break;
+    case 24034:
+        text = "Healer";
+        color = 0xFF800000; // Maroon
+        break;
+    case 24035:
+        text = "Hardcore Player";
+        color = 0xFF008000; // Dark Green
+        break;
+    case 24036:
+        text = "Duelist";
+        color = 0xFF000080; // Navy
+        break;
+    case 24037:
+        text = "Commander";
+        color = 0xFF808000; // Olive
+        break;
+    case 24038:
+        text = "Captain";
+        color = 0xFF800080; // Purple
+        break;
+    case 24039:
+        text = "Veteran";
+        color = 0xFFC0C0C0; // Silver
+        break;
+    case 24040:
+        text = "War Chief";
+        color = 0xFF808080; // Gray
+        break;
+    case 24041:
+        text = "Adventurer";
+        color = 0xFF400040; // Dark Purple
+        break;
+    case 24042:
+        text = "Queen";
+        color = 0xFF004080; // Dark Blue-Gray
+        break;
+    case 24043:
+        text = "King";
+        color = 0xFF008080; // Teal
+        break;
+    case 24044:
+        text = "Baron";
+        color = 0xFF800000; // Maroon
+        break;
+    case 24045:
+        text = "Baroness";
+        color = 0xFF008000; // Dark Green
+        break;
+    case 24046:
+        text = "Mystic";
+        color = 0xFF000080; // Navy
+        break;
+    case 24047:
+        text = "King of Arena";
+        color = 0xFFFFA500; // Orange
+        break;
+    case 24048:
+        text = "Elemental Master";
+        color = 0xFF800080; // Purple
+        break;
+    case 24049:
+        text = "Witch";
+        color = 0xFF008080; // Teal
+        break;
+    case 24050:
+        text = "Paladin";
+        color = 0xFF00FA9A; // Medium Spring Green
+        break;
+    case 24051:
+        text = "Shaman";
+        color = 0xFFDAA520; // Golden Rod
+        break;
+    case 24052:
+        text = "Druid";
+        color = 0xFFB22222; // Fire Brick
+        break;
+    case 24053:
+        text = "Death Knight";
+        color = 0xFFADFF2F; // Green Yellow
+        break;
+    case 24054:
+        text = "High Priestess";
+        color = 0xFF7FFF00; // Chartreuse
+        break;
+    case 24055:
+        text = "Interloper";
+        color = 0xFFDC143C; // Crimson
+        break;
+    case 24056:
+        text = "Crazy Cat Lady";
+        color = 0xFFFF69B4; // Hot Pink
+        break;
+    case 24057:
+        text = "Mercenary";
+        color = 0xFFFA8072; // Salmon
+        break;
+    case 24058:
+        text = "Salty";
+        color = 0xFF8A2BE2; // Blue Violet
+        break;
+    case 24059:
+        text = "MVP";
+        color = 0xFF5F9F9F; // Cadet Blue
+        break;
+    case 24060:
+        text = "Old School";
+        color = 0xFFB0E0E6; // Powder Blue
+        break;
+    case 24061:
+        text = "Cryptic";
+        color = 0xFFB22222; // Fire Brick
+        break;
+    case 24062:
+        text = "Chill Player";
+        color = 0xFF8B4513; // Saddle Brown
+        break;
+    case 24063:
+        text = "Farmer";
+        color = 0xFFFAEBD7; // Antique White
+        break;
+    case 24064:
+        text = "Enigmatic";
+        color = 0xFF7CFC00; // Lawn Green
+        break;
+    case 24065:
+        text = "Rich";
+        color = 0xFFFFD700; // Gold
+        break;
+    case 24066:
+        text = "Fairy";
+        color = 0xFFDA70D6; // Orchid
+        break;
+    case 24067:
+        text = "Survivor";
+        color = 0xFF00FF7F; // Spring Green
+        break;
+    case 24068:
+        text = "Untouchable";
+        color = 0xFF4682B4; // Steel Blue
+        break;
+    case 24069:
+        text = "Maniac";
+        color = 0xFF32CD32; // Lime Green
+        break;
+    case 240104:
+        text = "Love Fool";
+        color = 0xFFFF1493; // Deep Pink
+        break;
+    case 24105:
+        text = "Archivist";
+        color = 0xFFB0C4DE; // Light Steel Blue
+        break;
+    case 24106:
+        text = "Hero";
+        color = 0xFF00CED1; // Dark Turquoise
+        break;
+    case 24107:
+        text = "Mad Scientist";
+        color = 0xFF1E90FF; // Dodger Blue
+        break;
+    case 24108:
+        text = "Artisan";
+        color = 0xFF7B68EE; // Medium Slate Blue
+        break;
+    case 24109:
+        text = "Staff Member";
+        color = 0xFF8B008B; // Dark Magenta
+        break;
+    case 24110:
+        text = "Game Master";
+        color = 0xFFB8860B; // Dark Golden Rod
+        break;
+    case 24114:
+        text = "Content Creator";
+        color = 0xFFBC8F8F; // Rosy Brown
+        break;
+    default:
             return;
         }
 
