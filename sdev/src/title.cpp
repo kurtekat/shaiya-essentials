@@ -14,7 +14,8 @@ namespace title
 
     void hook(CCharacter* user, float x, float y, float extrusion)
     {
-        const char* text = "Champion of Shaiya";
+        const char* text = nullptr;
+        int color = 0xFFFFFFFF;
         const int effectDataId = 280;
 
         if (!user->pet)
@@ -25,8 +26,91 @@ namespace title
             return;
 
         auto itemId = (itemInfo->type * 1000) + itemInfo->typeId;
-        if (itemId != 120043)
+
+        switch (itemId) {
+        case 120001:
+            text = "Champion of Shaiya";
+            color = 0xFFFF0000;
+            break;
+        case 120002:
+            text = "Test2";
+            color = 0xFF00FF00;
+            break;
+        case 120003:
+            text = "Test3";
+            color = 0xFF0000FF;
+            break;
+        case 120004:
+            text = "Test4";
+            color = 0xFFFFFF00;
+            break;
+        case 120005:
+            text = "Test5";
+            color = 0xFF00FFFF;
+            break;
+        case 120006:
+            text = "Test6";
+            color = 0xFFFF00FF;
+            break;
+        case 120007:
+            text = "Test7";
+            color = 0xFF800000;
+            break;
+        case 120008:
+            text = "Test8";
+            color = 0xFF008000;
+            break;
+        case 120009:
+            text = "Test9";
+            color = 0xFF000080;
+            break;
+        case 120010:
+            text = "Test10";
+            color = 0xFF808000;
+            break;
+        case 120011:
+            text = "Test11";
+            color = 0xFF800080;
+            break;
+        case 120012:
+            text = "Test12";
+            color = 0xFFC0C0C0;
+            break;
+        case 120013:
+            text = "Test13";
+            color = 0xFF808080;
+            break;
+        case 120014:
+            text = "Test14";
+            color = 0xFF400040;
+            break;
+        case 120015:
+            text = "Test15";
+            color = 0xFF004080;
+            break;
+        case 120016:
+            text = "Test16";
+            color = 0xFF008080;
+            break;
+        case 120017:
+            text = "Test17";
+            color = 0xFF800000;
+            break;
+        case 120018:
+            text = "Test18";
+            color = 0xFF008000;
+            break;
+        case 120019:
+            text = "Test19";
+            color = 0xFF000080;
+            break;
+        case 120020:
+            text = "Test20";
+            color = 0xFFFFA500;
+            break;
+        default:
             return;
+        }
 
         if (!user->title.text)
         {
@@ -41,7 +125,7 @@ namespace title
         auto posY = y - 30.0;
         auto posX = x - user->title.pointX;
 
-        CStaticText::Draw(user->title.text, long(posX), long(posY), extrusion, 0xFFFFFFFF);
+        CStaticText::Draw(user->title.text, long(posX), long(posY), extrusion, color);
     }
 }
 
