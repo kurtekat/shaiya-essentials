@@ -28,7 +28,7 @@
     <ClInclude Include="include\shaiya\include\CQuickSlot.h" />
     <ClInclude Include="include\shaiya\include\CStaticText.h" />
     <ClInclude Include="include\shaiya\include\CWindow.h" />
-    <ClInclude Include="include\shaiya\include\ShaiyaColor.h" />
+    <ClInclude Include="include\shaiya\include\HexColor.h" />
     <ClInclude Include="include\shaiya\include\Country.h" />
     <ClInclude Include="include\shaiya\include\CCharacter.h" />
     <ClInclude Include="include\shaiya\include\CGuild.h" />

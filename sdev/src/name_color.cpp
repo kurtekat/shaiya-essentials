@@ -4,105 +4,105 @@
 #include "include/static.h"
 #include "include/shaiya/include/CCharacter.h"
 #include "include/shaiya/include/CDataFile.h"
-#include "include/shaiya/include/ShaiyaColor.h"
+#include "include/shaiya/include/HexColor.h"
 #include "include/shaiya/include/ItemInfo.h"
 using namespace shaiya;
 
 namespace name_color
 {
-    const std::map<uint16_t, ShaiyaColor> g_itemRangeToColor
+    const std::map<uint16_t, HexColor> g_itemRangeToColor
     {
-        { 1, ShaiyaColor::LightBlue },
-        { 2, ShaiyaColor::Blue },
-        { 3, ShaiyaColor::Green },
-        { 4, ShaiyaColor::Yellow },
-        { 5, ShaiyaColor::Orange },
-        { 6, ShaiyaColor::Red },
-        { 7, ShaiyaColor::Pink },
-        { 8, ShaiyaColor::Purple },
-        { 9, ShaiyaColor::Gray },
-        { 10, ShaiyaColor::Black },
-        { 11, ShaiyaColor::Cyan },
-        { 12, ShaiyaColor::Magenta },
-        { 13, ShaiyaColor::Brown },
-        { 14, ShaiyaColor::Lime },
-        { 15, ShaiyaColor::Olive },
-        { 16, ShaiyaColor::Maroon },
-        { 17, ShaiyaColor::Navy },
-        { 18, ShaiyaColor::Teal },
-        { 19, ShaiyaColor::Silver },
-        { 20, ShaiyaColor::Gold },
-        { 21, ShaiyaColor::Crimson },
-        { 22, ShaiyaColor::Khaki },
-        { 23, ShaiyaColor::Lavender },
-        { 24, ShaiyaColor::Peach },
-        { 25, ShaiyaColor::Coral },
-        { 26, ShaiyaColor::Salmon },
-        { 27, ShaiyaColor::Mint },
-        { 28, ShaiyaColor::Beige },
-        { 29, ShaiyaColor::Plum },
-        { 30, ShaiyaColor::Orchid },
-        { 31, ShaiyaColor::Rose },
-        { 32, ShaiyaColor::Wheat },
-        { 33, ShaiyaColor::Azure },
-        { 34, ShaiyaColor::Ivory },
-        { 35, ShaiyaColor::Snow },
-        { 36, ShaiyaColor::Honeydew },
-        { 37, ShaiyaColor::LimeGreen },
-        { 38, ShaiyaColor::LightCoral },
-        { 39, ShaiyaColor::LightPink },
-        { 40, ShaiyaColor::SeaGreen },
-        { 41, ShaiyaColor::SkyBlue },
-        { 42, ShaiyaColor::SlateGray },
-        { 43, ShaiyaColor::Turquoise },
-        { 44, ShaiyaColor::VioletRed },
-        { 45, ShaiyaColor::SpringGreen },
-        { 46, ShaiyaColor::Chartreuse },
-        { 47, ShaiyaColor::Sienna },
-        { 48, ShaiyaColor::SlateBlue },
-        { 49, ShaiyaColor::SteelBlue },
-        { 50, ShaiyaColor::Tomato },
-        { 51, ShaiyaColor::DarkRed },
-        { 52, ShaiyaColor::DarkOrange },
-        { 53, ShaiyaColor::DarkViolet },
-        { 54, ShaiyaColor::LightYellow },
-        { 55, ShaiyaColor::LightCyan },
-        { 56, ShaiyaColor::PapayaWhip },
-        { 57, ShaiyaColor::Moccasin },
-        { 58, ShaiyaColor::NavajoWhite },
-        { 59, ShaiyaColor::LemonChiffon },
-        { 60, ShaiyaColor::MistyRose }
+        { 1, HexColor::LightBlue },
+        { 2, HexColor::Blue },
+        { 3, HexColor::Green },
+        { 4, HexColor::Yellow },
+        { 5, HexColor::Orange },
+        { 6, HexColor::Red },
+        { 7, HexColor::Pink },
+        { 8, HexColor::Purple },
+        { 9, HexColor::Gray },
+        { 10, HexColor::Black },
+        { 11, HexColor::Cyan },
+        { 12, HexColor::Magenta },
+        { 13, HexColor::Brown },
+        { 14, HexColor::Lime },
+        { 15, HexColor::Olive },
+        { 16, HexColor::Maroon },
+        { 17, HexColor::Navy },
+        { 18, HexColor::Teal },
+        { 19, HexColor::Silver },
+        { 20, HexColor::Gold },
+        { 21, HexColor::Crimson },
+        { 22, HexColor::Khaki },
+        { 23, HexColor::Lavender },
+        { 24, HexColor::Peach },
+        { 25, HexColor::Coral },
+        { 26, HexColor::Salmon },
+        { 27, HexColor::Mint },
+        { 28, HexColor::Beige },
+        { 29, HexColor::Plum },
+        { 30, HexColor::Orchid },
+        { 31, HexColor::Rose },
+        { 32, HexColor::Wheat },
+        { 33, HexColor::Azure },
+        { 34, HexColor::Ivory },
+        { 35, HexColor::Snow },
+        { 36, HexColor::Honeydew },
+        { 37, HexColor::LimeGreen },
+        { 38, HexColor::LightCoral },
+        { 39, HexColor::LightPink },
+        { 40, HexColor::SeaGreen },
+        { 41, HexColor::SkyBlue },
+        { 42, HexColor::SlateGray },
+        { 43, HexColor::Turquoise },
+        { 44, HexColor::VioletRed },
+        { 45, HexColor::SpringGreen },
+        { 46, HexColor::Chartreuse },
+        { 47, HexColor::Sienna },
+        { 48, HexColor::SlateBlue },
+        { 49, HexColor::SteelBlue },
+        { 50, HexColor::Tomato },
+        { 51, HexColor::DarkRed },
+        { 52, HexColor::DarkOrange },
+        { 53, HexColor::DarkViolet },
+        { 54, HexColor::LightYellow },
+        { 55, HexColor::LightCyan },
+        { 56, HexColor::PapayaWhip },
+        { 57, HexColor::Moccasin },
+        { 58, HexColor::NavajoWhite },
+        { 59, HexColor::LemonChiffon },
+        { 60, HexColor::MistyRose }
 
 
     };
 
-    ShaiyaColor get_mob_name_color(int mobLevel)
+    HexColor get_mob_name_color(int mobLevel)
     {
         int gap = mobLevel - g_pPlayerData->level;
         if (gap >= 10)
-            return ShaiyaColor::Gray;
+            return HexColor::Gray;
 
         switch (gap)
         {
         case 9: case 8:
-            return ShaiyaColor::Pink;
+            return HexColor::Pink;
         case 7: case 6:
-            return ShaiyaColor::Red;
+            return HexColor::Red;
         case 5: case 4:
-            return ShaiyaColor::Orange;
+            return HexColor::Orange;
         case 3: case 2:
-            return ShaiyaColor::Yellow;
+            return HexColor::Yellow;
         case 1: case 0: case -1:
-            return ShaiyaColor::Green;
+            return HexColor::Green;
         case -2: case -3:
-            return ShaiyaColor::Blue;
+            return HexColor::Blue;
         case -4: case -5:
-            return ShaiyaColor::LightBlue;
+            return HexColor::LightBlue;
         default:
             break;
         }
 
-        return ShaiyaColor::White;
+        return HexColor::White;
     }
 
     D3DCOLOR get_helmet_name_color(CCharacter* user)
