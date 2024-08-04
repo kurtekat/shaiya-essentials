@@ -1,3 +1,5 @@
+#include <map>
+#include <tuple>
 #include <util/util.h>
 #include "include/main.h"
 #include "include/static.h"
@@ -6,19 +8,70 @@
 #include "include/shaiya/include/CMonster.h"
 #include "include/shaiya/include/CStaticText.h"
 #include "include/shaiya/include/ItemInfo.h"
+#include "include/shaiya/include/HexColor.h"
 using namespace shaiya;
 
 namespace title
 {
+    std::map<ItemId, std::tuple<const char*, HexColor>> mantles
+    {
+        { 24028, { "Champion of Teos", HexColor::Red } },
+        { 24029, { "Gladiator", HexColor::Green } },
+        { 24030, { "Protector", HexColor::Blue } },
+        { 24031, { "Archimage", HexColor::Yellow } },
+        { 24032, { "Hawk Eye", HexColor::Aqua } },
+        { 24033, { "Outlaw", HexColor::Fuchsia } },
+        { 24034, { "Healer", HexColor::Maroon } },
+        { 24035, { "Hardcore Player", HexColor::DarkGreen } },
+        { 24036, { "Duelist", HexColor::NavyBlue } },
+        { 24037, { "Commander", HexColor::Olive } },
+        { 24038, { "Captain", HexColor::Purple } },
+        { 24039, { "Veteran", HexColor::Silver } },
+        { 24040, { "War Chief", HexColor::Gray } },
+        { 24041, { "Adventurer", HexColor::DarkPurple } },
+        { 24042, { "Queen", HexColor::DarkBlueGray } },
+        { 24043, { "King", HexColor::Teal } },
+        { 24044, { "Baron", HexColor::Maroon } },
+        { 24045, { "Baroness", HexColor::DarkGreen } },
+        { 24046, { "Mystic", HexColor::NavyBlue } },
+        { 24047, { "King of Arena", HexColor::Orange } },
+        { 24048, { "Elemental Master", HexColor::Purple } },
+        { 24049, { "Witch", HexColor::Teal } },
+        { 24050, { "Paladin", HexColor::MediumSpringGreen } },
+        { 24051, { "Shaman", HexColor::GoldenRod } },
+        { 24052, { "Druid", HexColor::FireBrick } },
+        { 24053, { "Death Knight", HexColor::GreenYellow } },
+        { 24054, { "High Priestess", HexColor::Chartreuse } },
+        { 24055, { "Interloper", HexColor::Crimson } },
+        { 24056, { "Crazy Cat Lady", HexColor::HotPink } },
+        { 24057, { "Mercenary", HexColor::Salmon } },
+        { 24058, { "Salty", HexColor::BlueViolet } },
+        { 24059, { "MVP", HexColor::CadetBlue } },
+        { 24060, { "Old School", HexColor::PowderBlue } },
+        { 24061, { "Cryptic", HexColor::FireBrick } },
+        { 24062, { "Chill Player", HexColor::SaddleBrown } },
+        { 24063, { "Farmer", HexColor::AntiqueWhite } },
+        { 24064, { "Enigmatic", HexColor::LawnGreen } },
+        { 24065, { "Rich", HexColor::Gold } },
+        { 24066, { "Fairy", HexColor::Orchid } },
+        { 24067, { "Survivor", HexColor::SpringGreen } },
+        { 24068, { "Untouchable", HexColor::SteelBlue } },
+        { 24069, { "Maniac", HexColor::LimeGreen } },
+        { 24104, { "Love Fool", HexColor::DeepPink } },
+        { 24105, { "Archivist", HexColor::LightSlateBlue } },
+        { 24106, { "Hero", HexColor::Turquoise } },
+        { 24107, { "Mad Scientist", HexColor::DodgerBlue } },
+        { 24108, { "Artisan", HexColor::MediumSlateBlue } },
+        { 24109, { "Staff Member", HexColor::DarkMagenta } },
+        { 24110, { "Game Master", HexColor::DarkGoldenRod } },
+        { 24114, { "Content Creator", HexColor::RosyBrown } },
+    };
+
     constexpr float chat_y_add = 1.75F;
 
     void hook(CCharacter* user, float x, float y, float extrusion)
     {
-        const char* text = nullptr;
-        int color = 0xFFFFFFFF;
-        const int effectDataId = 280;
-
-        if (!user->mantleType)
+        if (!user->mantleType || !user->mantleTypeId)
             return;
 
         auto itemInfo = CDataFile::GetItemInfo(user->mantleType, user->mantleTypeId);
@@ -27,210 +80,12 @@ namespace title
 
         auto itemId = (itemInfo->type * 1000) + itemInfo->typeId;
 
-switch (itemId) {
-    case 24028:
-        text = "Champion of Teos";
-        color = 0xFFFF0000; // Red
-        break;
-    case 24029:
-        text = "Gladiator";
-        color = 0xFF00FF00; // Green
-        break;
-    case 24030:
-        text = "Protector";
-        color = 0xFF0000FF; // Blue
-        break;
-    case 24031:
-        text = "Archimage";
-        color = 0xFFFFFF00; // Yellow
-        break;
-    case 24032:
-        text = "Hawk Eye";
-        color = 0xFF00FFFF; // Aqua
-        break;
-    case 24033:
-        text = "Outlaw";
-        color = 0xFFFF00FF; // Fuchsia
-        break;
-    case 24034:
-        text = "Healer";
-        color = 0xFF800000; // Maroon
-        break;
-    case 24035:
-        text = "Hardcore Player";
-        color = 0xFF008000; // Dark Green
-        break;
-    case 24036:
-        text = "Duelist";
-        color = 0xFF000080; // Navy
-        break;
-    case 24037:
-        text = "Commander";
-        color = 0xFF808000; // Olive
-        break;
-    case 24038:
-        text = "Captain";
-        color = 0xFF800080; // Purple
-        break;
-    case 24039:
-        text = "Veteran";
-        color = 0xFFC0C0C0; // Silver
-        break;
-    case 24040:
-        text = "War Chief";
-        color = 0xFF808080; // Gray
-        break;
-    case 24041:
-        text = "Adventurer";
-        color = 0xFF400040; // Dark Purple
-        break;
-    case 24042:
-        text = "Queen";
-        color = 0xFF004080; // Dark Blue-Gray
-        break;
-    case 24043:
-        text = "King";
-        color = 0xFF008080; // Teal
-        break;
-    case 24044:
-        text = "Baron";
-        color = 0xFF800000; // Maroon
-        break;
-    case 24045:
-        text = "Baroness";
-        color = 0xFF008000; // Dark Green
-        break;
-    case 24046:
-        text = "Mystic";
-        color = 0xFF000080; // Navy
-        break;
-    case 24047:
-        text = "King of Arena";
-        color = 0xFFFFA500; // Orange
-        break;
-    case 24048:
-        text = "Elemental Master";
-        color = 0xFF800080; // Purple
-        break;
-    case 24049:
-        text = "Witch";
-        color = 0xFF008080; // Teal
-        break;
-    case 24050:
-        text = "Paladin";
-        color = 0xFF00FA9A; // Medium Spring Green
-        break;
-    case 24051:
-        text = "Shaman";
-        color = 0xFFDAA520; // Golden Rod
-        break;
-    case 24052:
-        text = "Druid";
-        color = 0xFFB22222; // Fire Brick
-        break;
-    case 24053:
-        text = "Death Knight";
-        color = 0xFFADFF2F; // Green Yellow
-        break;
-    case 24054:
-        text = "High Priestess";
-        color = 0xFF7FFF00; // Chartreuse
-        break;
-    case 24055:
-        text = "Interloper";
-        color = 0xFFDC143C; // Crimson
-        break;
-    case 24056:
-        text = "Crazy Cat Lady";
-        color = 0xFFFF69B4; // Hot Pink
-        break;
-    case 24057:
-        text = "Mercenary";
-        color = 0xFFFA8072; // Salmon
-        break;
-    case 24058:
-        text = "Salty";
-        color = 0xFF8A2BE2; // Blue Violet
-        break;
-    case 24059:
-        text = "MVP";
-        color = 0xFF5F9F9F; // Cadet Blue
-        break;
-    case 24060:
-        text = "Old School";
-        color = 0xFFB0E0E6; // Powder Blue
-        break;
-    case 24061:
-        text = "Cryptic";
-        color = 0xFFB22222; // Fire Brick
-        break;
-    case 24062:
-        text = "Chill Player";
-        color = 0xFF8B4513; // Saddle Brown
-        break;
-    case 24063:
-        text = "Farmer";
-        color = 0xFFFAEBD7; // Antique White
-        break;
-    case 24064:
-        text = "Enigmatic";
-        color = 0xFF7CFC00; // Lawn Green
-        break;
-    case 24065:
-        text = "Rich";
-        color = 0xFFFFD700; // Gold
-        break;
-    case 24066:
-        text = "Fairy";
-        color = 0xFFDA70D6; // Orchid
-        break;
-    case 24067:
-        text = "Survivor";
-        color = 0xFF00FF7F; // Spring Green
-        break;
-    case 24068:
-        text = "Untouchable";
-        color = 0xFF4682B4; // Steel Blue
-        break;
-    case 24069:
-        text = "Maniac";
-        color = 0xFF32CD32; // Lime Green
-        break;
-    case 240104:
-        text = "Love Fool";
-        color = 0xFFFF1493; // Deep Pink
-        break;
-    case 24105:
-        text = "Archivist";
-        color = 0xFFB0C4DE; // Light Steel Blue
-        break;
-    case 24106:
-        text = "Hero";
-        color = 0xFF00CED1; // Dark Turquoise
-        break;
-    case 24107:
-        text = "Mad Scientist";
-        color = 0xFF1E90FF; // Dodger Blue
-        break;
-    case 24108:
-        text = "Artisan";
-        color = 0xFF7B68EE; // Medium Slate Blue
-        break;
-    case 24109:
-        text = "Staff Member";
-        color = 0xFF8B008B; // Dark Magenta
-        break;
-    case 24110:
-        text = "Game Master";
-        color = 0xFFB8860B; // Dark Golden Rod
-        break;
-    case 24114:
-        text = "Content Creator";
-        color = 0xFFBC8F8F; // Rosy Brown
-        break;
-    default:
+        auto it = mantles.find(itemId);
+        if (it == mantles.end())
             return;
-        }
+
+        auto text = std::get<0>(it->second);
+        auto color = std::to_underlying(std::get<1>(it->second));
 
         if (!user->title.text)
         {
@@ -246,6 +101,15 @@ switch (itemId) {
         auto posX = x - user->title.pointX;
 
         CStaticText::Draw(user->title.text, long(posX), long(posY), extrusion, color);
+    }
+
+    void reset(CCharacter* user)
+    {
+        if (!user->title.text)
+            return;
+
+        user->title.text->texture->Release();
+        user->title.text = nullptr;
     }
 }
 
@@ -309,6 +173,47 @@ void __declspec(naked) naked_0x41275F()
     }
 }
 
+unsigned u0x412630 = 0x412630;
+unsigned u0x59F1BC = 0x59F1BC;
+void __declspec(naked) naked_0x59F1B7()
+{
+    __asm
+    {
+        // original 
+        call u0x412630
+
+        pushad
+
+        push esi
+        call title::reset
+        add esp,0x4
+
+        popad
+
+        jmp u0x59F1BC
+    }
+}
+
+unsigned u0x59F634 = 0x59F634;
+void __declspec(naked) naked_0x59F62F()
+{
+    __asm
+    {
+        // original 
+        call u0x412630
+
+        pushad
+
+        push esi
+        call title::reset
+        add esp,0x4
+
+        popad
+
+        jmp u0x59F634
+    }
+}
+
 void hook::title()
 {
     util::detour((void*)0x453E7C, naked_0x453E7C, 5);
@@ -316,4 +221,8 @@ void hook::title()
     util::detour((void*)0x41830D, naked_0x41830D, 5);
     // increase chat balloon height (1.5 to 1.75)
     util::detour((void*)0x41275F, naked_0x41275F, 6);
+    // mantle remove case
+    util::detour((void*)0x59F1B7, naked_0x59F1B7, 5);
+    // mantle swap case
+    util::detour((void*)0x59F62F, naked_0x59F62F, 5);
 }
