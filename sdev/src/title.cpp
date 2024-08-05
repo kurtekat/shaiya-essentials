@@ -13,7 +13,7 @@ using namespace shaiya;
 
 namespace title
 {
-    std::map<ItemId, std::tuple<const char*, HexColor>> mantles
+    std::map<ItemId, std::tuple<const char*, HexColor>> items
     {
         { 24028, { "Champion of Teos", HexColor::Red } },
         { 24029, { "Gladiator", HexColor::Green } },
@@ -80,8 +80,8 @@ namespace title
 
         auto itemId = (itemInfo->type * 1000) + itemInfo->typeId;
 
-        auto it = mantles.find(itemId);
-        if (it == mantles.end())
+        auto it = items.find(itemId);
+        if (it == items.end())
             return;
 
         auto text = std::get<0>(it->second);
@@ -173,15 +173,11 @@ void __declspec(naked) naked_0x41275F()
     }
 }
 
-unsigned u0x412630 = 0x412630;
-unsigned u0x59F1BC = 0x59F1BC;
-void __declspec(naked) naked_0x59F1B7()
+unsigned u0x59F0C8 = 0x59F0C8;
+void __declspec(naked) naked_0x59F0C3()
 {
     __asm
     {
-        // original 
-        call u0x412630
-
         pushad
 
         push esi
@@ -190,27 +186,9 @@ void __declspec(naked) naked_0x59F1B7()
 
         popad
 
-        jmp u0x59F1BC
-    }
-}
-
-unsigned u0x59F634 = 0x59F634;
-void __declspec(naked) naked_0x59F62F()
-{
-    __asm
-    {
         // original 
-        call u0x412630
-
-        pushad
-
-        push esi
-        call title::reset
-        add esp,0x4
-
-        popad
-
-        jmp u0x59F634
+        cmp byte ptr[esp+0x14],0x0
+        jmp u0x59F0C8
     }
 }
 
@@ -221,8 +199,6 @@ void hook::title()
     util::detour((void*)0x41830D, naked_0x41830D, 5);
     // increase chat balloon height (1.5 to 1.75)
     util::detour((void*)0x41275F, naked_0x41275F, 6);
-    // mantle remove case
-    util::detour((void*)0x59F1B7, naked_0x59F1B7, 5);
-    // mantle swap case
-    util::detour((void*)0x59F62F, naked_0x59F62F, 5);
+    // 0x507 packet method
+    util::detour((void*)0x59F0C3, naked_0x59F0C3, 5);
 }
