@@ -128,6 +128,18 @@ void __declspec(naked) naked_0x528D8D()
     }
 }
 
+unsigned u0x4E753B = 0x4E753B;
+void __declspec(naked) naked_0x4E7506()
+{
+    __asm
+    {
+        // CPlayerData->weaponStep[i]
+        movzx ecx,word ptr[ecx+edx*0x2+0x6268]
+        mov eax,ecx
+        jmp u0x4E753B
+    }
+}
+
 void hook::gui()
 {
     // chat color bug workaround
@@ -142,6 +154,8 @@ void hook::gui()
     util::detour((void*)0x41E2BB, naked_0x41E2BB, 7);
     // apply stats x10
     util::detour((void*)0x528D8D, naked_0x528D8D, 9);
+    // return the exact weapon step value
+    util::detour((void*)0x4E7506, naked_0x4E7506, 8);
 
     // remove ep6 vehicle section (auction board)
     util::write_memory((void*)0x463FE0, 0x07, 1);

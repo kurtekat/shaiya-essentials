@@ -1,4 +1,3 @@
-#include <array>
 #include <util/util.h>
 #include "include/main.h"
 #include "include/static.h"
@@ -7,11 +6,6 @@
 #include "include/shaiya/include/CPlayerData.h"
 #include "include/shaiya/include/NpcType.h"
 using namespace shaiya;
-
-const std::array<uint16_t, 21> g_weapon_step
-{
-    0, 7, 14, 21, 31, 41, 51, 64, 77, 90, 106, 122, 138, 157, 176, 195, 217, 239, 261, 286, 311
-};
 
 enum HelpMenuButtonIndex
 {
@@ -139,27 +133,6 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     }
 }
 
-int get_weapon_step(uint8_t enchantStep)
-{
-    if (enchantStep >= g_weapon_step.size())
-        return 0;
-
-    return g_weapon_step[enchantStep];
-}
-
-unsigned u0x4B8766 = 0x4B8766;
-void __declspec(naked) naked_0x4B8755()
-{
-    __asm
-    {
-        push eax // step
-        call get_weapon_step
-        add esp,0x4
-
-        jmp u0x4B8766
-    }
-}
-
 unsigned u0x522165 = 0x522165;
 unsigned u0x51C070 = 0x51C070;
 void __declspec(naked) naked_0x522160() 
@@ -185,8 +158,6 @@ void __declspec(naked) naked_0x522160()
 
 void hook::custom_game()
 {
-    // weapon enchant bug
-    util::detour((void*)0x4B8755, naked_0x4B8755, 5);
     // npc-to-go
     util::detour((void*)0x522160, naked_0x522160, 5);
 
