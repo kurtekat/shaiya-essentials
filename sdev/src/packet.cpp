@@ -45,8 +45,10 @@ void __declspec(naked) naked_0x59F896()
 {
     __asm
     {
-        // CCharacter*
-        cmp esi,dword ptr ds:[0x904AA0]
+        // CPlayerData->charId
+        mov edi,dword ptr ds:[0x90E2F4]
+        // CCharacter->id
+        cmp edi,[esi+0x34]
         jne wrong_appearance
 
         // sex, size, face, hair
