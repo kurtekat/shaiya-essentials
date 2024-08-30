@@ -2,19 +2,11 @@
 #include "include/shaiya/common.h"
 #include "include/shaiya/include/CPlayerData.h"
 #include "include/shaiya/include/CWorldMgr.h"
+#include "include/shaiya/include/TargetType.h"
 
 namespace shaiya
 {
     struct CStaticText;
-
-    enum struct TargetType : int
-    {
-        None = -1,
-        Mob,
-        Item,
-        User,
-        Npc
-    };
 
     #pragma pack(push, 1)
     // 00572D30 ctor

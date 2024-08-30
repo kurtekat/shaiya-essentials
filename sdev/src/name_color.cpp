@@ -72,8 +72,6 @@ namespace name_color
         { 58, HexColor::NavajoWhite },
         { 59, HexColor::LemonChiffon },
         { 60, HexColor::MistyRose }
-
-
     };
 
     HexColor get_mob_name_color(int mobLevel)

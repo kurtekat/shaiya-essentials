@@ -1,7 +1,7 @@
 #pragma once
-#include <array>
 #pragma warning(disable: 4005)
 #define DIRECTINPUT_VERSION 0x800
+#include <array>
 #define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -22,90 +22,19 @@
 
 namespace shaiya
 {
-    using Packet = UINT8*;
-
     template<class T, size_t N>
     using Array = std::array<T, N>;
 
     template<size_t N>
     using CharArray = std::array<char, N>;
 
-    using CharId = ULONG;
-    using UserId = ULONG;
-    using ItemId = UINT32;
-    using CraftName = std::array<char, 21>;
-    using Gems = std::array<UINT8, 6>;
-    using CloakBadge = Gems;
+    template<size_t N>
+    using CharArrayW = std::array<wchar_t, N>;
 
-    enum struct Attribute : UINT8
-    {
-        None,
-        Fire1,
-        Water1,
-        Earth1,
-        Wind1,
-        Fire2,
-        Water2,
-        Earth2,
-        Wind2
-    };
+    using Address = unsigned;
+    using Packet = unsigned char*;
 
-    enum struct AuthStatus : UINT8
-    {
-        AdminA = 1,
-        AdminB,
-        AdminC,
-        AdminD,
-        AdminE,
-        None = 11
-    };
-
-    enum struct Family : UINT8
-    {
-        Human,
-        Elf,
-        Deatheater,
-        Vail
-    };
-
-    enum struct Grow : UINT8
-    {
-        Easy,
-        Normal,
-        Hard,
-        Ultimate
-    };
-
-    enum struct Job : UINT8
-    {
-        AttackFighter,
-        DefenseFighter,
-        PatrolRogue,
-        ShootRogue,
-        AttackMage,
-        DefenseMage
-    };
-
-    enum struct Sex : UINT8
-    {
-        Male,
-        Female
-    };
-
-    #pragma pack(push, 1)
-    struct BoundingBox
-    {
-        D3DVECTOR lowerLimit;
-        D3DVECTOR upperLimit;
-    };
-    #pragma pack(pop)
-
-    #pragma pack(push, 1)
-    struct MeshFace
-    {
-        UINT16 vertexIndex1;
-        UINT16 vertexIndex2;
-        UINT16 vertexIndex3;
-    };
-    #pragma pack(pop)
+    using UserId = unsigned long;
+    using CharId = unsigned long;
+    using ItemId = uint32_t;
 }

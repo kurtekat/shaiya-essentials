@@ -11,7 +11,6 @@
 #include "include/shaiya/include/CCharacter.h"
 #include "include/shaiya/include/CDataFile.h"
 #include "include/shaiya/include/ItemInfo.h"
-#include "include/shaiya/include/ItemType.h"
 using namespace shaiya;
 
 namespace vehicle
@@ -28,7 +27,7 @@ namespace vehicle
 
     void init()
     {
-        for (int i = 1; i <= 255; ++i)
+        for (int i = 1; i <= UINT8_MAX; ++i)
         {
             auto itemInfo = CDataFile::GetItemInfo(int(ItemType::Vehicle), i);
             if (!itemInfo)

@@ -17,6 +17,15 @@ enum HelpMenuButtonIndex
     PlayMode
 };
 
+#pragma pack(push, 1)
+struct VetRewardLevelOutgoing
+{
+    UINT16 opcode{ 0x218 };
+
+    VetRewardLevelOutgoing() = default;
+};
+#pragma pack(pop)
+
 void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
 {
     // should not allow two windows at once
@@ -50,8 +59,8 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
         if (g_pPlayerData->country == Country::Light)
         {
-            uint16_t packet{ 0x218 };
-            CNetwork::Send(&packet, 2);
+            VetRewardLevelOutgoing outgoing{};
+            CNetwork::Send(&outgoing, sizeof(VetRewardLevelOutgoing));
 
             g_var->killLv = 0;
             g_var->deathLv = 0;
@@ -63,8 +72,8 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
         }
         else
         {
-            uint16_t packet{ 0x218 };
-            CNetwork::Send(&packet, 2);
+            VetRewardLevelOutgoing outgoing{};
+            CNetwork::Send(&outgoing, sizeof(VetRewardLevelOutgoing));
 
             g_var->killLv = 0;
             g_var->deathLv = 0;

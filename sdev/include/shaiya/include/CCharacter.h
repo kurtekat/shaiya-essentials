@@ -1,7 +1,12 @@
 #pragma once
 #include "include/shaiya/common.h"
 #include "include/shaiya/include/Country.h"
+#include "include/shaiya/include/Family.h"
+#include "include/shaiya/include/Grow.h"
+#include "include/shaiya/include/Job.h"
 #include "include/shaiya/include/MotionType.h"
+#include "include/shaiya/include/PartyType.h"
+#include "include/shaiya/include/Sex.h"
 #include "include/shaiya/include/ShapeType.h"
 
 namespace shaiya

@@ -1,5 +1,6 @@
 #pragma once
 #include "include/shaiya/common.h"
+#include "include/shaiya/include/Attribute.h"
 
 namespace shaiya
 {
