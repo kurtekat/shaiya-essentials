@@ -98,19 +98,17 @@ namespace vehicle
         // models coded in game.exe
         if (model == 31 || model == 32)
         {
-            uint8_t bone = 0x03;
-            std::memcpy((void*)0x414B13, &bone, 1);
-            std::memcpy((void*)0x414B67, &bone, 1);
+            util::write_memory((void*)0x414B13, 0x03, 1);
+            util::write_memory((void*)0x414B67, 0x03, 1);
             return 1;
         }
 
-        uint8_t main = get_main_bone(model);
-
+        auto main = get_main_bone(model);
         if (!main)
             return 0;
 
-        std::memcpy((void*)0x414B13, &main, 1);
-        std::memcpy((void*)0x414B67, &main, 1);
+        util::write_memory((void*)0x414B13, &main, 1);
+        util::write_memory((void*)0x414B67, &main, 1);
         return 1;
     }
 
@@ -119,32 +117,28 @@ namespace vehicle
         // models coded in game.exe
         if (model == 14 || model == 15 || model == 21)
         {
-            uint8_t rear = 0x44;
-            uint8_t main = 0x31;
-
             // rear bone
-            std::memcpy((void*)0x4137A2, &rear, 1);
-            std::memcpy((void*)0x4137F6, &rear, 1);
+            util::write_memory((void*)0x4137A2, 0x44, 1);
+            util::write_memory((void*)0x4137F6, 0x44, 1);
 
             // main bone
-            std::memcpy((void*)0x413847, &main, 1);
-            std::memcpy((void*)0x41389B, &main, 1);
+            util::write_memory((void*)0x413847, 0x31, 1);
+            util::write_memory((void*)0x41389B, 0x31, 1);
             return 1;
         }
 
-        uint8_t main = get_main_bone(model);
-        uint8_t rear = get_rear_bone(model);
-
+        auto main = get_main_bone(model);
+        auto rear = get_rear_bone(model);
         if (!main || !rear)
             return 0;
 
         // rear bone
-        std::memcpy((void*)0x4137A2, &rear, 1);
-        std::memcpy((void*)0x4137F6, &rear, 1);
+        util::write_memory((void*)0x4137A2, &rear, 1);
+        util::write_memory((void*)0x4137F6, &rear, 1);
 
         // main bone
-        std::memcpy((void*)0x413847, &main, 1);
-        std::memcpy((void*)0x41389B, &main, 1);
+        util::write_memory((void*)0x413847, &main, 1);
+        util::write_memory((void*)0x41389B, &main, 1);
         return 1;
     }
 }
