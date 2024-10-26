@@ -58,6 +58,7 @@
     <ClCompile Include="src\camera_limit.cpp" />
     <ClCompile Include="src\cmd.cpp" />
     <ClCompile Include="src\custom_game.cpp" />
+    <ClCompile Include="src\equipment.cpp" />
     <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\item_icon.cpp" />
     <ClCompile Include="src\dllmain.cpp" />

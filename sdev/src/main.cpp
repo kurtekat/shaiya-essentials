@@ -37,6 +37,7 @@ void Main()
     hook::camera_limit();
     hook::cmd();
     hook::custom_game();
+    hook::equipment();
     hook::gui();
     hook::item_icon();
     hook::name_color();

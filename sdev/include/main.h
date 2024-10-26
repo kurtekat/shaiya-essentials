@@ -8,6 +8,7 @@ namespace hook
     void camera_limit();
     void cmd();
     void custom_game();
+    void equipment();
     void gui();
     void item_icon();
     void name_color();
