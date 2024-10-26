@@ -31,7 +31,7 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     // should not allow two windows at once
     if (g_pPlayerData->windowType != WindowType::None)
     {
-        Static::GetMsg(31, 806, 12);
+        Static::SysMsgTextOut(31, 806, 12);
         return;
     }
 

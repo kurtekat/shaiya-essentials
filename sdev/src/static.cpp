@@ -7,10 +7,10 @@ void Static::DrawRect(D3DCOLOR argb, long x, long y, long w, long h)
     (*(LPFN)0x4B6180)(argb, x, y, w, h);
 }
 
-void Static::GetMsg(int type, int line, int unknown)
+void Static::SysMsgTextOut(int messageType, int messageId, int unknown)
 {
     typedef void(__cdecl* LPFN)(int, int, int);
-    (*(LPFN)0x423150)(type, line, unknown);
+    (*(LPFN)0x423150)(messageType, messageId, unknown);
 }
 
 bool Static::PlayWav(const char* filename, D3DVECTOR* origin, float volume, bool repeat)

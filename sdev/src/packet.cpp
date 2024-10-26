@@ -27,7 +27,7 @@ namespace packet
     {
         StringCbCopyA(g_var->t.data(), g_var->t.size(), killer->charName.data());
         g_var->v = killCount;
-        Static::GetMsg(5, 509, 1);
+        Static::SysMsgTextOut(5, 509, 1);
     }
 }
 
