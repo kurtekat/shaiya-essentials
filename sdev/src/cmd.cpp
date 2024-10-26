@@ -27,18 +27,20 @@ void load_advanced_config()
 
 int command_handler(char* text)
 {
-    std::istringstream iss(text);
-    std::vector<std::string> argv;
+    std::string input(text);
+    if (!input.starts_with('/'))
+        return 1;
 
-    for (std::string str; std::getline(iss, str, ' '); )
-        argv.push_back(str);
-
-    if (argv.empty())
-        return 0;
-
+    auto argv = util::split(input, ' ');
     auto argc = argv.size();
 
-    if (iss.str() == "/effects on")
+    if (!argc)
+    {
+        Static::SysMsgTextOut(31, 253, 12);
+        return 0;
+    }
+
+    if (input == "/effects on")
     {
         g_showEffects = true;
         g_showMobEffects = true;
@@ -46,7 +48,7 @@ int command_handler(char* text)
         return 0;
     }
 
-    if (iss.str() == "/effects off")
+    if (input == "/effects off")
     {
         g_showEffects = false;
         g_showMobEffects = false;
@@ -54,7 +56,7 @@ int command_handler(char* text)
         return 0;
     }
 
-    if (iss.str() == "/pets on")
+    if (input == "/pets on")
     {
         g_showMobEffects = true;
         g_showPets = true;
@@ -62,7 +64,7 @@ int command_handler(char* text)
         return 0;
     }
 
-    if (iss.str() == "/pets off")
+    if (input == "/pets off")
     {
         g_showMobEffects = false;
         g_showPets = false;
@@ -70,28 +72,28 @@ int command_handler(char* text)
         return 0;
     }
 
-    if (iss.str() == "/wings on")
+    if (input == "/wings on")
     {
         g_showWings = true;
         WritePrivateProfileStringA("ADVANCED", "WINGS", "TRUE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/wings off")
+    if (input == "/wings off")
     {
         g_showWings = false;
         WritePrivateProfileStringA("ADVANCED", "WINGS", "FALSE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/costumes on")
+    if (input == "/costumes on")
     {
         g_showCostumes = true;
         WritePrivateProfileStringA("ADVANCED", "COSTUMES", "TRUE", g_var->iniFileName.data());
         return 0;
     }
 
-    if (iss.str() == "/costumes off")
+    if (input == "/costumes off")
     {
         g_showCostumes = false;
         WritePrivateProfileStringA("ADVANCED", "COSTUMES", "FALSE", g_var->iniFileName.data());
