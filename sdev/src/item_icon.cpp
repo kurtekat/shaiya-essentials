@@ -7,11 +7,11 @@
 #include "include/shaiya/include/ItemInfo.h"
 using namespace shaiya;
 
-void draw_item_icon(void* unknown, CItem* item, long x, long y)
+void draw_item_icon(void* unknown, CItem* item, long x, long y, D3DCOLOR color)
 {
     // original code
     typedef void(__thiscall* LPFN)(void*, D3DCOLOR, long, long, int, int, int, bool, bool);
-    (*(LPFN)0x4B7240)(unknown, 0xFFFFFFFF, x, y, item->type, item->typeId, item->count, false, true);
+    (*(LPFN)0x4B7240)(unknown, color, x, y, item->type, item->typeId, item->count, false, true);
 
     // skip lapis and fireworks
     if (item->type == int(ItemType::Lapis) || item->type == int(ItemType::Special100))
@@ -80,9 +80,10 @@ void __declspec(naked) naked_0x51826D()
     {
         pushad
 
-        mov ecx,dword ptr[esp+0x30]
+        mov edx,dword ptr[esp+0x30]
 
-        push ecx // y
+        push ecx // color
+        push edx // y
         push ebp // x
 
         // inventory->item
@@ -92,7 +93,7 @@ void __declspec(naked) naked_0x51826D()
         lea ecx,[esi+0x30]
         push ecx // unknown
         call draw_item_icon
-        add esp,0x10
+        add esp,0x14
 
         popad
 
@@ -111,15 +112,16 @@ void __declspec(naked) naked_0x4FFCE3()
         mov eax,dword ptr[esp+0x38]
         mov ecx,dword ptr[esp+0x3C]
 
-        push eax // y
-        push ecx // x
+        push -0x1 // color
+        push eax  // y
+        push ecx  // x
 
         // inventory->item
         lea edx,[esi+0x90E2F8]
         push edx // item
         push edi // unknown
         call draw_item_icon
-        add esp,0x10
+        add esp,0x14
 
         popad
 
