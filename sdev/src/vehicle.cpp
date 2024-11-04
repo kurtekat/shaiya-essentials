@@ -10,6 +10,7 @@
 #include "include/static.h"
 #include "include/shaiya/include/CCharacter.h"
 #include "include/shaiya/include/CDataFile.h"
+#include "include/shaiya/include/CMonster.h"
 #include "include/shaiya/include/ItemInfo.h"
 using namespace shaiya;
 
@@ -33,11 +34,12 @@ namespace vehicle
             if (!itemInfo)
                 continue;
 
-            if (!itemInfo->reqRec)
+            auto model = itemInfo->vehicleModel;
+            if (model < 33)
                 continue;
 
             Vehicle vehicle{};
-            vehicle.model = itemInfo->vehicleModel;
+            vehicle.model = model;
             vehicle.bone1 = itemInfo->reqRec;
             vehicle.bone2 = itemInfo->reqInt;
             // e.g., vehicle_model033.wav
@@ -49,7 +51,7 @@ namespace vehicle
     int play_wav(CCharacter* user)
     {
         auto model = user->vehicleModel;
-        if (model <= 32)
+        if (model < 33)
             return 1;
 
         auto vehicle = std::find_if(g_vehicles.begin(), g_vehicles.end(), [&model](const auto& vehicle) {
@@ -66,177 +68,164 @@ namespace vehicle
         return 0;
     }
 
-    int get_main_bone(int model)
+    Vehicle* get_vehicle(int model)
     {
         auto vehicle = std::find_if(g_vehicles.begin(), g_vehicles.end(), [&model] (const auto& vehicle) {
             return vehicle.model == model;
             });
 
         if (vehicle == g_vehicles.end())
-            return 0;
+            return nullptr;
 
-        return vehicle->bone1;
+        return vehicle._Ptr;
     }
 
-    int get_rear_bone(int model)
+    void make_matrix(CCharacter* user, int model)
     {
-        auto vehicle = std::find_if(g_vehicles.begin(), g_vehicles.end(), [&model] (const auto& vehicle) {
-            return vehicle.model == model;
-            });
+        if (user->family > Family::Vail)
+            return;
 
-        if (vehicle == g_vehicles.end())
-            return 0;
+        auto vehicle = get_vehicle(model);
+        if (!vehicle)
+            return;
 
         if (!vehicle->bone1)
-            return 0;
+            return;
 
-        return vehicle->bone2;
+        auto bone1 = CMonster::GetBoneMatrix(user->vehicle, vehicle->bone1);
+        if (!bone1)
+            return;
+
+        D3DXMATRIX rotY{};
+        Static::D3DXMatrixRotationY(&rotY, 3.14F);
+
+        D3DXMATRIX rotZ{};
+        Static::D3DXMatrixRotationZ(&rotZ, 4.71F);
+
+        D3DXMATRIX mat1{};
+        Static::D3DXMatrixMultiply(&mat1, &rotY, &rotZ);
+
+        D3DXMATRIX mat2{};
+        Static::D3DXMatrixMultiply(&mat2, &mat1, bone1);
+
+        D3DXMATRIX mat3{};
+        Static::D3DXMatrixMultiply(&mat3, &mat2, &g_var->camera.world);
+        g_var->camera.world = mat3;
     }
 
-    int set_solo_bone(int model)
+    void make_matrices(CCharacter* user, int model)
     {
-        // models coded in game.exe
-        if (model == 31 || model == 32)
-        {
-            util::write_memory((void*)0x414B13, 0x03, 1);
-            util::write_memory((void*)0x414B67, 0x03, 1);
-            return 1;
-        }
+        if (user->family > Family::Vail)
+            return;
 
-        auto main = get_main_bone(model);
-        if (!main)
-            return 0;
+        auto vehicle = get_vehicle(model);
+        if (!vehicle)
+            return;
 
-        util::write_memory((void*)0x414B13, &main, 1);
-        util::write_memory((void*)0x414B67, &main, 1);
-        return 1;
-    }
+        if (!vehicle->bone1 || !vehicle->bone2)
+            return;
 
-    int set_dual_bone(int model)
-    {
-        // models coded in game.exe
-        if (model == 14 || model == 15 || model == 21)
-        {
-            // rear bone
-            util::write_memory((void*)0x4137A2, 0x44, 1);
-            util::write_memory((void*)0x4137F6, 0x44, 1);
+        auto bone2 = CMonster::GetBoneMatrix(user->vehicle, vehicle->bone2);
+        if (!bone2)
+            return;
 
-            // main bone
-            util::write_memory((void*)0x413847, 0x31, 1);
-            util::write_memory((void*)0x41389B, 0x31, 1);
-            return 1;
-        }
+        D3DXMATRIX rotY{};
+        Static::D3DXMatrixRotationY(&rotY, 3.14F);
 
-        auto main = get_main_bone(model);
-        auto rear = get_rear_bone(model);
-        if (!main || !rear)
-            return 0;
+        D3DXMATRIX rotZ{};
+        Static::D3DXMatrixRotationZ(&rotZ, 4.71F);
 
-        // rear bone
-        util::write_memory((void*)0x4137A2, &rear, 1);
-        util::write_memory((void*)0x4137F6, &rear, 1);
+        D3DXMATRIX mat1{};
+        Static::D3DXMatrixMultiply(&mat1, &rotY, &rotZ);
 
-        // main bone
-        util::write_memory((void*)0x413847, &main, 1);
-        util::write_memory((void*)0x41389B, &main, 1);
-        return 1;
+        D3DXMATRIX mat2{};
+        Static::D3DXMatrixMultiply(&mat2, &mat1, bone2);
+
+        D3DXMATRIX mat3{};
+        Static::D3DXMatrixMultiply(&mat3, &mat2, &g_var->camera.world);
+        user->vehicleMatrix = mat3;
+
+        auto bone1 = CMonster::GetBoneMatrix(user->vehicle, vehicle->bone1);
+        if (!bone1)
+            return;
+
+        Static::D3DXMatrixRotationY(&rotY, 3.14F);
+        Static::D3DXMatrixRotationZ(&rotZ, 4.71F);
+
+        D3DXMATRIX mat4{};
+        Static::D3DXMatrixMultiply(&mat4, &rotY, &rotZ);
+
+        D3DXMATRIX mat5{};
+        Static::D3DXMatrixMultiply(&mat5, &mat4, bone1);
+
+        D3DXMATRIX mat6{};
+        Static::D3DXMatrixMultiply(&mat6, &mat5, &g_var->camera.world);
+        g_var->camera.world = mat6;
     }
 }
 
-unsigned u0x414626 = 0x414626;
-unsigned u0x4149F1 = 0x4149F1;
-unsigned u0x4146FD = 0x4146FD;
+unsigned u0x414606 = 0x414606;
 unsigned u0x414AFF = 0x414AFF;
 unsigned u0x414D85 = 0x414D85;
-void __declspec(naked) naked_0x4145FE() 
+void __declspec(naked) naked_0x4145FE()
 {
     __asm 
     {
+        movzx eax,al
+        cmp eax,0x21
+        jge new_mount
+
         // original
-        cmp al,0x0C
-        je _0x4149F1
-        cmp al,0x0D
-        je _0x4149F1
-        movzx ecx,al
-        cmp ecx,0x1F
-        jge _label
-        cmp al,0x7
-        jne _0x4146FD
-
-        // continue
-        jmp u0x414626
-
-        _0x4146FD:
-        jmp u0x4146FD
-
-        _0x4149F1:
-        jmp u0x4149F1
-
-        _label:
-        pushad
-
-        push ecx // model
-        call vehicle::set_solo_bone
-        add esp,0x4
-        test eax,eax
-
-        popad
-
-        jne _0x414AFF
-
-        // default
-        jmp u0x414D85
+        cmp al,0x1F
+        je _0x414AFF
+        jmp u0x414606
 
         _0x414AFF:
         jmp u0x414AFF
+
+        new_mount:
+        pushad
+
+        push eax // model
+        push ebp // user
+        call vehicle::make_matrix
+        add esp,0x8
+
+        popad
+
+        jmp u0x414D85
     }
 }
 
-unsigned u0x413010 = 0x413010;
 unsigned u0x41378E = 0x41378E;
-unsigned u0x4132AB = 0x4132AB;
+unsigned u0x412FF8 = 0x412FF8;
 void __declspec(naked) naked_0x412FF0() 
 {
     __asm 
     {
+        movzx eax,al
+        cmp eax,0x21
+        jge new_mount
+
         // original
-        cmp al,0x0E
-        je _label
-        cmp al,0x0F
-        je _label
-        cmp al,0x15
-        je _label
-
-        // custom >= 33
-        movzx ecx,al
-        cmp ecx,0x21
-        jge _label
-        cmp al,0x11
-        jne _0x4132AB
-
-        // continue
-        jmp u0x413010
-
-        _0x4132AB:
-        jmp u0x4132AB
-
-        _label:
-        pushad
-
-        push ecx // model
-        call vehicle::set_dual_bone
-        add esp,0x4
-        test eax,eax
-
-        popad
-
-        jne _0x41378E
-
-        // default
-        jmp u0x414D85
+        cmp al,0xE
+        je _0x41378E
+        jmp u0x412FF8
 
         _0x41378E:
         jmp u0x41378E
+
+        new_mount:
+        pushad
+
+        push eax // model
+        push ebp // user
+        call vehicle::make_matrices
+        add esp,0x8
+
+        popad
+
+        jmp u0x414D85
     }
 }
 
@@ -292,6 +281,6 @@ void hook::vehicle()
     util::detour((void*)0x4145FE, naked_0x4145FE, 8);
     // dual vehicles
     util::detour((void*)0x412FF0, naked_0x412FF0, 8);
-    // play .wav by model
+    // play .wav sound
     util::detour((void*)0x41A7FF, naked_0x41A7FF, 7);
 }
