@@ -12,19 +12,19 @@ namespace shaiya
     // 00572D30 ctor
     struct Camera
     {
-        D3DMATRIX world;           //0x22B69B0  0x00
-        D3DMATRIX view;            //0x22B69F0  0x40
-        D3DMATRIX projection;      //0x22B6A30  0x80
+        D3DXMATRIX world;          //0x22B69B0  0x00
+        D3DXMATRIX view;           //0x22B69F0  0x40
+        D3DXMATRIX projection;     //0x22B6A30  0x80
         D3DVECTOR pos;             //0x22B6A70  0xC0
         D3DVECTOR lookAt;          //0x22B6A7C  0xCC
         D3DVECTOR up;              //0x22B6A88  0xD8
         DXGI_RGB color;            //0x22B6A94  0xE4
         // Character->pos
         D3DVECTOR target;          //0x22B6AA0  0xF0
-        D3DMATRIX mat1;            //0x22B6AAC  0xFC
-        D3DMATRIX mat2;            //0x22B6AEC  0x13C
-        D3DMATRIX mat3;            //0x22B6B2C  0x17C
-        D3DMATRIX mat4;            //0x22B6B6C  0x1BC
+        D3DXMATRIX mat1;           //0x22B6AAC  0xFC
+        D3DXMATRIX mat2;           //0x22B6AEC  0x13C
+        D3DXMATRIX mat3;           //0x22B6B2C  0x17C
+        D3DXMATRIX mat4;           //0x22B6B6C  0x1BC
         // 0x22B6BAC  0x1FC
         PAD(348);
         // 0x22B6D08  0x358
@@ -128,6 +128,12 @@ namespace shaiya
         static void DrawRect(D3DCOLOR argb, long x, long y, long w, long h);
         static bool PlayWav(const char* filename, D3DVECTOR* origin, float volume, bool repeat);
         static void SysMsgTextOut(int messageType, int messageId, int unknown);
+
+        // D3DX utilities (deprecated)
+
+        static D3DXMATRIX* D3DXMatrixMultiply(D3DXMATRIX* out, D3DXMATRIX* mat1, D3DXMATRIX* mat2);
+        static D3DXMATRIX* D3DXMatrixRotationY(D3DXMATRIX* out, float angle);
+        static D3DXMATRIX* D3DXMatrixRotationZ(D3DXMATRIX* out, float angle);
     };
     #pragma pack(pop)
 

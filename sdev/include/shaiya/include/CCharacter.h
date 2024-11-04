@@ -76,7 +76,8 @@ namespace shaiya
         ULONG targetId;               //0x188
         PAD(4);
         BOOL running;                 //0x190
-        PAD(8);
+        PAD(4);
+        BOOL enableLight;             //0x198
         UINT8 hair;                   //0x19C
         UINT8 face;                   //0x19D
         UINT8 size;                   //0x19E
@@ -133,8 +134,9 @@ namespace shaiya
         Family family;                //0x2B8
         Grow grow;                    //0x2B9
         PAD(10);
-        BOOL visible;                 //0x2C4
-        PAD(12);
+        BOOL isTransparent;           //0x2C4
+        PAD(8);
+        CMonster* vehicle;            //0x2D0
         bool isAdmin;                 //0x2D4
         PAD(23);
         ShapeType shapeType;          //0x2EC
@@ -153,7 +155,10 @@ namespace shaiya
         PAD(2);
         UINT32 vehicleSpeed;          //0x3C4
         bool isSnowboard;             //0x3C8
-        PAD(91);
+        PAD(19);
+        D3DXMATRIX vehicleMatrix;     //0x3DC
+        // 0x41C
+        PAD(8); 
         BOOL isGuildMaster;           //0x424
         PAD(8);
         CMonster* pet;                //0x430
@@ -165,4 +170,7 @@ namespace shaiya
         CharacterTitle title;         //0x43C
     };
     #pragma pack(pop)
+
+    //static_assert(sizeof(CCharacter) == 0x43C);
+    static_assert(sizeof(CCharacter) == 0x444);
 }

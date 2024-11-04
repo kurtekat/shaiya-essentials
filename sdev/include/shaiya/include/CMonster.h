@@ -9,7 +9,7 @@ namespace shaiya
     // 004185A0 ctor
     struct CMonster
     {
-        PAD(4);
+        void* vftable;          //0x00
         D3DVECTOR pos;          //0x04
         D3DVECTOR dir;          //0x10
         D3DVECTOR up;           //0x1C
@@ -37,6 +37,10 @@ namespace shaiya
         long namePointX;        //0xFC
         PAD(52);
         // 0x134
+
+        static D3DXMATRIX* GetBoneMatrix(CMonster* mob, int bone);
     };
     #pragma pack(pop)
+
+    static_assert(sizeof(CMonster) == 0x134);
 }

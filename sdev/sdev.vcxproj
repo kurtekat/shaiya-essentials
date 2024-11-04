@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\shaiya\src\CDataFile.cpp" />
+    <ClCompile Include="include\shaiya\src\CMonster.cpp" />
     <ClCompile Include="include\shaiya\src\CNetwork.cpp" />
     <ClCompile Include="include\shaiya\src\CQuickSlot.cpp" />
     <ClCompile Include="include\shaiya\src\CStaticText.cpp" />

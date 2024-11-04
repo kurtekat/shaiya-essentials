@@ -193,6 +193,9 @@
     <ClCompile Include="src\equipment.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="include\shaiya\src\CMonster.cpp">
+      <Filter>include\shaiya\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\sdev.rc">
