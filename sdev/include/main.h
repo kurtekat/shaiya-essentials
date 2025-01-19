@@ -16,6 +16,7 @@ namespace hook
     void quick_slot();
     void title();
     void vehicle();
+    void window();
 }
 
 inline int g_showCostumes = false;

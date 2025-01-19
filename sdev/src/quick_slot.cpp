@@ -1,6 +1,5 @@
 #include <array>
 #include <format>
-#include <memory>
 #include <string>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -11,68 +10,70 @@
 #include "include/shaiya/include/Unknown.h"
 using namespace shaiya;
 
-inline CQuickSlot* g_pQuickSlot3 = nullptr;
-
 namespace quick_slot
 {
-    void get_config(Unknown* unknown, CQuickSlot* quickSlot)
+    void get_configuration(Unknown* unknown)
     {
         auto section = std::format("INTERFACE_{}X{}", g_var->viewport.Width, g_var->viewport.Height);
-        int x = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_X", 0, g_var->iniFileName.data());
-        int y = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_Y", 0, g_var->iniFileName.data());
+        auto x = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_X", 0, g_var->iniFileName.data());
+        auto y = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_Y", 0, g_var->iniFileName.data());
 
-        quickSlot->window.pos.x = x;
-        quickSlot->window.pos.y = y;
+        g_pQuickSlot3->window.pos.x = x;
+        g_pQuickSlot3->window.pos.y = y;
 
-        if (!unknown->quickSlot1->plus)
-            return;
-
-        int plus = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT2_PLUS", 0, g_var->iniFileName.data());
-        unknown->quickSlot2->plus = plus ? true : false;
-        g_pQuickSlot3->window.visible = unknown->quickSlot2->plus ? true : false;
+        std::string str(MAX_PATH, 0);
+        GetPrivateProfileStringA(section.c_str(), "QUICKSLOTPLUS_PLUS", "", str.data(), str.size(), g_var->iniFileName.data());
+        unknown->quickSlot2->plus = str.compare(0, 5, "FALSE") == 0 ? false : true;
+        CTexture::CreateFromFile(&unknown->quickSlot2->plusTexture, "data/interface", "main_slot_plus.tga", 32, 64);
     }
 
-    void set_config(CQuickSlot* quickSlot)
+    void set_configuration(CQuickSlot* quickSlot)
     {
         auto section = std::format("INTERFACE_{}X{}", g_var->viewport.Width, g_var->viewport.Height);
-        auto x = std::to_string(g_pQuickSlot3->window.pos.x);
-        auto y = std::to_string(g_pQuickSlot3->window.pos.y);
-
-        WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_X", x.c_str(), g_var->iniFileName.data());
-        WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_Y", y.c_str(), g_var->iniFileName.data());
 
         if (quickSlot->id == 1)
         {
-            std::string value = quickSlot->plus ? "1" : "0";
-            WritePrivateProfileStringA(section.c_str(), "QUICKSLOT2_PLUS", value.c_str(), g_var->iniFileName.data());
+            std::string value = quickSlot->plus ? "TRUE" : "FALSE";
+            WritePrivateProfileStringA(section.c_str(), "QUICKSLOTPLUS_PLUS", value.c_str(), g_var->iniFileName.data());
         }
-    }
-
-    void init(Unknown* unknown)
-    {
-        auto block = std::make_unique<CQuickSlot>();
-
-        if (block)
+        
+        if (quickSlot->id == 2)
         {
-            g_pQuickSlot3 = CQuickSlot::Init(block.release(), 2);
-            g_pQuickSlot3->bag = 2;
-            g_pQuickSlot3->window.visible = false;
-            g_pPlayerData->quickSlot3Bag = 2;
+            auto x = std::to_string(g_pQuickSlot3->window.pos.x);
+            auto y = std::to_string(g_pQuickSlot3->window.pos.y);
 
-            get_config(unknown, g_pQuickSlot3);
-            unknown->quickSlot3 = g_pQuickSlot3;
+            WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_X", x.c_str(), g_var->iniFileName.data());
+            WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_Y", y.c_str(), g_var->iniFileName.data());
         }
     }
 
-    BOOL set_bag_to_bag(int bag, int slot)
+    void create(Unknown* unknown)
+    {
+        auto block = Static::malloc(sizeof(CQuickSlot));
+        if (!block)
+            return;
+
+        g_pQuickSlot3 = CQuickSlot::Create(block, 2);
+        g_pQuickSlot3->bag = 2;
+        g_pPlayerData->quickSlot3Bag = 2;
+        get_configuration(unknown);
+
+        if (!unknown->quickSlot1->plus || !unknown->quickSlot2->plus)
+            g_pQuickSlot3->window.visible = false;
+    }
+
+    BOOL bag_to_bag(int bag, int slot)
     {
         return CQuickSlot::BagToBag(g_pQuickSlot3, bag, slot);
     }
 
-    void set_window_visible(CQuickSlot* quickSlot)
+    void reset(Unknown* unknown)
     {
-        if (quickSlot->id == 1)
-            g_pQuickSlot3->window.visible = !quickSlot->plus ? true : false;
+        if (!g_pQuickSlot3)
+            return;
+
+        CQuickSlot::Reset(g_pQuickSlot3, true);
+        g_pQuickSlot3 = nullptr;
     }
 }
 
@@ -88,7 +89,7 @@ void __declspec(naked) naked_0x4FE693()
         pushad
 
         push esi // quickSlot
-        call quick_slot::set_config
+        call quick_slot::set_configuration
         add esp,0x4
 
         popad
@@ -97,23 +98,41 @@ void __declspec(naked) naked_0x4FE693()
     }
 }
 
-unsigned u0x42B6DA = 0x42B6DA;
-void __declspec(naked) naked_0x42B6D4()
+unsigned u0x42B6C9 = 0x42B6C9;
+void __declspec(naked) naked_0x42B6C3()
 {
     __asm
     {
         pushad
 
         push esi
-        call quick_slot::init
+        call quick_slot::create
         add esp,0x4
 
         popad
 
         // original
-        mov eax,[esi+0x17C]
         lea edx,[esi+0x1D8]
-        jmp u0x42B6DA
+        jmp u0x42B6C9
+    }
+}
+
+unsigned u0x42A68C = 0x42A68C;
+void __declspec(naked) naked_0x42A686()
+{
+    __asm
+    {
+        pushad
+
+        push esi
+        call quick_slot::reset
+        add esp,0x4
+
+        popad
+
+        // original
+        mov ecx,[esi+0x190]
+        jmp u0x42A68C
     }
 }
 
@@ -130,7 +149,7 @@ void __declspec(naked) naked_0x4A4021()
 
         push ecx // slot
         push edx // bag
-        call quick_slot::set_bag_to_bag
+        call quick_slot::bag_to_bag
         add esp,0x8
         test eax,eax
 
@@ -158,7 +177,7 @@ void __declspec(naked) naked_0x4A4103()
 
         push eax  // slot
         push 0x64 // bag
-        call quick_slot::set_bag_to_bag
+        call quick_slot::bag_to_bag
         add esp,0x8
         test eax,eax
 
@@ -187,7 +206,7 @@ void __declspec(naked) naked_0x4A41D9()
 
         push edx  // slot
         push 0x65 // bag
-        call quick_slot::set_bag_to_bag
+        call quick_slot::bag_to_bag
         add esp,0x8
         test eax,eax
 
@@ -204,18 +223,19 @@ void __declspec(naked) naked_0x4A41D9()
     }
 }
 
-unsigned u0x4FE582 = 0x4FE582;
-unsigned u0x4FE597 = 0x4FE597;
-void __declspec(naked) naked_0x4FE57C() 
+unsigned u0x4FF959 = 0x4FF959;
+unsigned u0x4FF9A5 = 0x4FF9A5;
+void __declspec(naked) naked_0x4FF950() 
 {
     __asm 
     {
-        cmp byte ptr[esp+0x28],0x2
-        jnl _0x4FE582
-        jmp u0x4FE597
+        // quickSlot->id
+        cmp byte ptr[esi+0x124],0x2
+        jge _0x4FF9A5
+        jmp u0x4FF959
 
-        _0x4FE582:
-        jmp u0x4FE582
+        _0x4FF9A5:
+        jmp u0x4FF9A5
     }
 }
 
@@ -227,7 +247,7 @@ void __declspec(naked) naked_0x4FF29B()
     {
         // quickSlot->id
         cmp byte ptr[esi+0x124],0x2
-        je _0x4FF44D
+        jge _0x4FF44D
 
         // original
         mov eax,dword ptr ds:[0x7C0E8C]
@@ -235,42 +255,6 @@ void __declspec(naked) naked_0x4FF29B()
 
         _0x4FF44D:
         jmp u0x4FF44D
-    }
-}
-
-unsigned u0x4FF959 = 0x4FF959;
-unsigned u0x4FF9A5 = 0x4FF9A5;
-void __declspec(naked) naked_0x4FF950() 
-{
-    __asm 
-    {
-        // quickSlot->id
-        cmp byte ptr[esi+0x124],0x1
-        ja _0x4FF9A5
-        jmp u0x4FF959
-
-        _0x4FF9A5:
-        jmp u0x4FF9A5
-    }
-}
-
-unsigned u0x4FF99B = 0x4FF99B;
-void __declspec(naked) naked_0x4FF994() 
-{
-    __asm 
-    {
-        // original
-        mov byte ptr[esi+0x121],0x1
-
-        pushad
-
-        push esi // quickSlot
-        call quick_slot::set_window_visible
-        add esp,0x4
-
-        popad
-
-        jmp u0x4FF99B
     }
 }
 
@@ -282,44 +266,95 @@ void __declspec(naked) naked_0x4FFE70()
     {
         // quickSlot->id
         cmp byte ptr[edi+0x124],0x2
-        je _label
+        jge _0x4FFF8E
 
         // original
         cmp byte ptr[edi+0x124],0x0
         jmp u0x4FFE77
 
-        _label:
+        _0x4FFF8E:
         mov edx,[esp+0x14]
         jmp u0x4FFF8E
     }
 }
 
+unsigned u0x4FF5D4 = 0x4FF5D4;
+void __declspec(naked) naked_0x4FF5CE() 
+{
+    __asm 
+    {
+        // quickSlot->plus
+        mov [esi+0x119],al
+        // quickSlot->id
+        cmp byte ptr[esi+0x124],0x1
+        jne _0x4FF5D4
+
+        mov edi,[g_pQuickSlot3]
+        test edi,edi
+        je _0x4FF5D4
+
+        // quickSlot3->window.enabled
+        mov [edi+0x20],al
+
+        _0x4FF5D4:
+        jmp u0x4FF5D4
+    }
+}
+
+unsigned u0x49FA6A = 0x49FA6A;
+void __declspec(naked) naked_0x49FA60()
+{
+    __asm 
+    {
+        // quickSlot1->plus
+        movzx ecx,byte ptr[ecx+0x119]
+        // quickSlot2->window.enabled
+        mov [eax+0x20],ecx
+        test ecx,ecx
+        jne _0x49FA6A
+
+        // quickSlot2->plus
+        mov byte ptr[eax+0x119],cl
+        mov eax,[g_pQuickSlot3]
+        test eax,eax
+        je _0x49FA6A
+
+        // quickSlot3->window.enabled
+        mov [eax+0x20],ecx
+
+        _0x49FA6A:
+        jmp u0x49FA6A
+    }
+}
+
 void hook::quick_slot()
 {
-    // alloc quick slot
-    util::detour((void*)0x42B6D4, naked_0x42B6D4, 6);
+    // save configuration
+    util::detour((void*)0x4FE693, naked_0x4FE693, 5);
+    // allocate
+    util::detour((void*)0x42B6C3, naked_0x42B6C3, 6);
+    // free
+    util::detour((void*)0x42A686, naked_0x42A686, 6);
     // bag to bag item
     util::detour((void*)0x4A4021, naked_0x4A4021, 7);
     // bag to bag skill
     util::detour((void*)0x4A4103, naked_0x4A4103, 8);
     // bag to bag basic action
     util::detour((void*)0x4A41D9, naked_0x4A41D9, 7);
-    // ???
-    util::detour((void*)0x4FE57C, naked_0x4FE57C, 6);
-    // ???
-    util::detour((void*)0x4FF29B, naked_0x4FF29B, 5);
-    // drag window
+    // plus button
     util::detour((void*)0x4FF950, naked_0x4FF950, 9);
-    // quickSlot->plus
-    util::detour((void*)0x4FF994, naked_0x4FF994, 7);
-    // ???
+    // interaction with contents
+    util::detour((void*)0x4FF29B, naked_0x4FF29B, 5);
     util::detour((void*)0x4FFE70, naked_0x4FFE70, 7);
-    // save config
-    util::detour((void*)0x4FE693, naked_0x4FE693, 5);
-    // max quickSlot->id
+    // quickSlot2->plus
+    util::detour((void*)0x4FF5CE, naked_0x4FF5CE, 6);
+    // quickSlot2->window.enabled
+    util::detour((void*)0x49FA60, naked_0x49FA60, 7);
+
+    // quickSlot->id check
     util::write_memory((void*)0x4FEF3A, 0x02, 1);
-    // remove quick slot wait
+    // remove delay
     util::write_memory((void*)0x4FE8F1, 0x90, 2);
-    // remove revolver wait
+    // remove revolver delay
     util::write_memory((void*)0x50819C, 0x90, 6);
 }

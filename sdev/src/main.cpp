@@ -45,6 +45,7 @@ void Main()
     hook::quick_slot();
     hook::title();
     hook::vehicle();
+    hook::window();
 
     // character memory (0x43C to 0x444)
     util::write_memory((void*)0x41CC97, 0x44, 1);
