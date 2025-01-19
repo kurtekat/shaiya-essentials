@@ -25,6 +25,7 @@
     <ClInclude Include="include\shaiya\include\CQuickSlot.h" />
     <ClInclude Include="include\shaiya\include\CraftName.h" />
     <ClInclude Include="include\shaiya\include\CStaticText.h" />
+    <ClInclude Include="include\shaiya\include\CTexture.h" />
     <ClInclude Include="include\shaiya\include\CWindow.h" />
     <ClInclude Include="include\shaiya\include\Family.h" />
     <ClInclude Include="include\shaiya\include\Gems.h" />
@@ -54,6 +55,7 @@
     <ClCompile Include="include\shaiya\src\CNetwork.cpp" />
     <ClCompile Include="include\shaiya\src\CQuickSlot.cpp" />
     <ClCompile Include="include\shaiya\src\CStaticText.cpp" />
+    <ClCompile Include="include\shaiya\src\CTexture.cpp" />
     <ClCompile Include="include\shaiya\src\CWindow.cpp" />
     <ClCompile Include="include\shaiya\src\CWorldMgr.cpp" />
     <ClCompile Include="src\camera_limit.cpp" />
@@ -70,6 +72,7 @@
     <ClCompile Include="src\static.cpp" />
     <ClCompile Include="src\title.cpp" />
     <ClCompile Include="src\vehicle.cpp" />
+    <ClCompile Include="src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\sdev.rc" />

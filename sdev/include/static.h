@@ -134,6 +134,9 @@ namespace shaiya
         static D3DXMATRIX* D3DXMatrixMultiply(D3DXMATRIX* out, D3DXMATRIX* mat1, D3DXMATRIX* mat2);
         static D3DXMATRIX* D3DXMatrixRotationY(D3DXMATRIX* out, float angle);
         static D3DXMATRIX* D3DXMatrixRotationZ(D3DXMATRIX* out, float angle);
+
+        // CRT
+        static void* malloc(size_t size);
     };
     #pragma pack(pop)
 

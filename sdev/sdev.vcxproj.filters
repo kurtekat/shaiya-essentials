@@ -131,6 +131,9 @@
     <ClInclude Include="include\shaiya\include\PartyType.h">
       <Filter>include\shaiya\include</Filter>
     </ClInclude>
+    <ClInclude Include="include\shaiya\include\CTexture.h">
+      <Filter>include\shaiya\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -195,6 +198,12 @@
     </ClCompile>
     <ClCompile Include="include\shaiya\src\CMonster.cpp">
       <Filter>include\shaiya\src</Filter>
+    </ClCompile>
+    <ClCompile Include="include\shaiya\src\CTexture.cpp">
+      <Filter>include\shaiya\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

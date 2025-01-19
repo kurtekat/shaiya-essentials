@@ -36,3 +36,9 @@ D3DXMATRIX* Static::D3DXMatrixRotationZ(D3DXMATRIX* out, float angle)
     typedef D3DXMATRIX* (__stdcall* LPFN)(D3DMATRIX*, float);
     return (*(LPFN)0x65A031)(out, angle);
 }
+
+void* Static::malloc(size_t size)
+{
+    typedef void* (__cdecl* LPFN)(size_t);
+    return (*(LPFN)0x6307F3)(size);
+}
