@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="include\common">
+      <UniqueIdentifier>{00a0a9e7-3372-40cf-89df-0f5a7cd1a7da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\network">
+      <UniqueIdentifier>{e4566376-048a-43dd-be64-6f0df05e917e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\network\game">
+      <UniqueIdentifier>{05bdfd22-bb87-458f-b45f-ff9665e82a2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\network\game\incoming">
+      <UniqueIdentifier>{57196889-ec8a-4213-93ed-b8f05cd76db2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\common\Attribute.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\Country.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\Family.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\Grow.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\Job.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\Sex.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\PartyTypes.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\SkillTypes.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\ItemTypes.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\UserTypes.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\NpcTypes.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\DateTime.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\network\game\incoming\0200.h">
+      <Filter>include\network\game\incoming</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
