@@ -1,10 +1,11 @@
 #include <util/util.h>
+#include <shaiya/include/common/Country.h>
+#include <shaiya/include/common/NpcTypes.h>
+#include <shaiya/include/network/game/incoming/0200.h>
 #include "include/main.h"
 #include "include/static.h"
-#include "include/shaiya/include/Country.h"
 #include "include/shaiya/include/CNetwork.h"
 #include "include/shaiya/include/CPlayerData.h"
-#include "include/shaiya/include/NpcType.h"
 using namespace shaiya;
 
 enum HelpMenuButtonIndex
@@ -17,21 +18,12 @@ enum HelpMenuButtonIndex
     PlayMode
 };
 
-#pragma pack(push, 1)
-struct VetRewardLevelOutgoing
-{
-    UINT16 opcode{ 0x218 };
-
-    VetRewardLevelOutgoing() = default;
-};
-#pragma pack(pop)
-
 void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
 {
     // should not allow two windows at once
     if (g_pPlayerData->windowType != WindowType::None)
     {
-        Static::SysMsgTextOut(31, 806, 12);
+        Static::MsgTextOut(31, 806, 12);
         return;
     }
 
@@ -39,19 +31,19 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
     case BasicPlay:
     {
-        g_pPlayerData->npcType = NpcType32::Blacksmith;
+        g_pPlayerData->npcType = std::to_underlying(NpcType::Blacksmith);
         g_pPlayerData->npcTypeId = 40;
         g_pPlayerData->npcIcon = 55;
-        g_pPlayerData->textBuf[0] = '\0';
+        g_pPlayerData->textBuffer[0] = '\0';
         g_pPlayerData->windowType = WindowType::Blacksmith;
         break;
     }
     case PlayGuide:
     {
-        g_pPlayerData->npcType = NpcType32::Merchant;
+        g_pPlayerData->npcType = std::to_underlying(NpcType::Merchant);
         g_pPlayerData->npcTypeId = 248;
         g_pPlayerData->npcIcon = 55;
-        g_pPlayerData->textBuf[0] = '\0';
+        g_pPlayerData->textBuffer[0] = '\0';
         g_pPlayerData->windowType = WindowType::Recreation;
         break;
     }
@@ -59,29 +51,29 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
         if (g_pPlayerData->country == Country::Light)
         {
-            VetRewardLevelOutgoing outgoing{};
-            CNetwork::Send(&outgoing, sizeof(VetRewardLevelOutgoing));
+            GameStatusResultInfoIncoming outgoing{};
+            CNetwork::Send(&outgoing, sizeof(GameStatusResultInfoIncoming));
 
             g_var->killLv = 0;
             g_var->deathLv = 0;
 
-            g_pPlayerData->npcType = NpcType32::VetManager;
+            g_pPlayerData->npcType = std::to_underlying(NpcType::VetManager);
             g_pPlayerData->npcTypeId = 1;
             g_pPlayerData->npcIcon = 55;
-            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->textBuffer[0] = '\0';
         }
         else
         {
-            VetRewardLevelOutgoing outgoing{};
-            CNetwork::Send(&outgoing, sizeof(VetRewardLevelOutgoing));
+            GameStatusResultInfoIncoming outgoing{};
+            CNetwork::Send(&outgoing, sizeof(GameStatusResultInfoIncoming));
 
             g_var->killLv = 0;
             g_var->deathLv = 0;
 
-            g_pPlayerData->npcType = NpcType32::VetManager;
+            g_pPlayerData->npcType = std::to_underlying(NpcType::VetManager);
             g_pPlayerData->npcTypeId = 2;
             g_pPlayerData->npcIcon = 55;
-            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->textBuffer[0] = '\0';
         }
 
         break;
@@ -90,18 +82,18 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
         if (g_pPlayerData->country == Country::Light)
         {
-            g_pPlayerData->npcType = NpcType32::Merchant;
+            g_pPlayerData->npcType = std::to_underlying(NpcType::Merchant);
             g_pPlayerData->npcTypeId = 179;
             g_pPlayerData->npcIcon = 55;
-            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->textBuffer[0] = '\0';
             g_pPlayerData->windowType = WindowType::BankTeller;
         }
         else
         {
-            g_pPlayerData->npcType = NpcType32::Merchant;
+            g_pPlayerData->npcType = std::to_underlying(NpcType::Merchant);
             g_pPlayerData->npcTypeId = 180;
             g_pPlayerData->npcIcon = 55;
-            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->textBuffer[0] = '\0';
             g_pPlayerData->windowType = WindowType::BankTeller;
         }
 
@@ -111,18 +103,18 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     {
         if (g_pPlayerData->country == Country::Light)
         {
-            g_pPlayerData->npcType = NpcType32::GuildMaster;
+            g_pPlayerData->npcType = std::to_underlying(NpcType::GuildMaster);
             g_pPlayerData->npcTypeId = 1;
             g_pPlayerData->npcIcon = 55;
-            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->textBuffer[0] = '\0';
             g_pPlayerData->windowType = WindowType::GuildMaster;
         }
         else
         {
-            g_pPlayerData->npcType = NpcType32::GuildMaster;
+            g_pPlayerData->npcType = std::to_underlying(NpcType::GuildMaster);
             g_pPlayerData->npcTypeId = 2;
             g_pPlayerData->npcIcon = 55;
-            g_pPlayerData->textBuf[0] = '\0';
+            g_pPlayerData->textBuffer[0] = '\0';
             g_pPlayerData->windowType = WindowType::GuildMaster;
         }
 
@@ -130,10 +122,10 @@ void set_help_menu_npc(HelpMenuButtonIndex buttonIndex)
     }
     case PlayMode:
     {
-        g_pPlayerData->npcType = NpcType32::Merchant;
+        g_pPlayerData->npcType = std::to_underlying(NpcType::Merchant);
         g_pPlayerData->npcTypeId = 437;
         g_pPlayerData->npcIcon = 55;
-        g_pPlayerData->textBuf[0] = '\0';
+        g_pPlayerData->textBuffer[0] = '\0';
         g_pPlayerData->windowType = WindowType::Merchant;
         break;
     }

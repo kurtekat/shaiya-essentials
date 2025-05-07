@@ -13,6 +13,8 @@ using namespace shaiya;
 
 namespace title
 {
+    using ItemId = uint32_t;
+
     std::map<ItemId, std::tuple<const char*, HexColor>> items
     {
         { 24028, { "Champion of Teos", HexColor::Red } },
@@ -91,7 +93,7 @@ namespace title
         {
             user->title.text = CStaticText::Create(text);
             auto w = CStaticText::GetTextWidth(text);
-            user->title.pointX = long(w * 0.5);
+            user->title.pointX = int(w * 0.5);
         }
 
         if (!user->title.text)
@@ -100,7 +102,7 @@ namespace title
         auto posY = y - 30.0;
         auto posX = x - user->title.pointX;
 
-        CStaticText::Draw(user->title.text, long(posX), long(posY), extrusion, color);
+        CStaticText::Draw(user->title.text, int(posX), int(posY), extrusion, color);
     }
 
     void reset(CCharacter* user)

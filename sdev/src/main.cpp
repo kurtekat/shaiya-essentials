@@ -3,7 +3,7 @@
 #include "include/shaiya/include/CCharacter.h"
 using namespace shaiya;
 
-void user_ctor_hook(CCharacter* user)
+void user_hook(CCharacter* user)
 {
     user->title.text = nullptr;
     user->title.pointX = 0;
@@ -20,7 +20,7 @@ void __declspec(naked) naked_0x419E73()
         pushad
 
         push esi // user
-        call user_ctor_hook
+        call user_hook
         add esp,0x4
 
         popad

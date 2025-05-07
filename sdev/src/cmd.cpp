@@ -12,16 +12,16 @@ void load_advanced_config()
 {
     std::string str(MAX_PATH, 0);
     GetPrivateProfileStringA("ADVANCED", "COSTUMES", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
-    g_showCostumes = str.compare(0, 4, "TRUE") == 0 ? true : false;
+    g_showCostumes = str.compare(0, 4, "TRUE") == 0;
 
     GetPrivateProfileStringA("ADVANCED", "WINGS", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
-    g_showWings = str.compare(0, 4, "TRUE") == 0 ? true : false;
+    g_showWings = str.compare(0, 4, "TRUE") == 0;
 
     GetPrivateProfileStringA("ADVANCED", "EFFECTS", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
-    g_showEffects = str.compare(0, 4, "TRUE") == 0 ? true : false;
+    g_showEffects = str.compare(0, 4, "TRUE") == 0;
 
     GetPrivateProfileStringA("ADVANCED", "PETS", "TRUE", str.data(), str.size(), g_var->iniFileName.data());
-    g_showPets = str.compare(0, 4, "TRUE") == 0 ? true : false;
+    g_showPets = str.compare(0, 4, "TRUE") == 0;
     g_showMobEffects = g_showPets;
 }
 
@@ -31,12 +31,16 @@ int command_handler(char* text)
     if (!input.starts_with('/'))
         return 1;
 
-    auto argv = util::split(input, ' ');
+    std::istringstream iss(input);
+    std::vector<std::string> argv;
+    for (std::string arg; std::getline(iss, arg, ' '); )
+        argv.push_back(arg);
+
     auto argc = argv.size();
 
     if (!argc)
     {
-        Static::SysMsgTextOut(31, 253, 12);
+        Static::MsgTextOut(31, 253, 12);
         return 0;
     }
 

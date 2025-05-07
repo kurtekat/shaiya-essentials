@@ -1,5 +1,3 @@
-#include <array>
-#include <strsafe.h>
 #include <util/util.h>
 #include "include/main.h"
 #include "include/static.h"
@@ -8,7 +6,7 @@ using namespace shaiya;
 
 namespace packet
 {
-    void remove_disguise(CCharacter* user)
+    void hook_0x303(CCharacter* user)
     {
         if (!user->petType)
             user->pet = nullptr;
@@ -23,11 +21,13 @@ namespace packet
             user->wings = nullptr;
     }
 
-    void revenge_message(CCharacter* killer, uint32_t killCount)
+    // Adds support for system message 509
+    void hook_0x229(CCharacter* killer, uint killCount)
     {
-        StringCbCopyA(g_var->t.data(), g_var->t.size(), killer->charName.data());
-        g_var->v = killCount;
-        Static::SysMsgTextOut(5, 509, 1);
+        std::memcpy(g_var->msgTargetName.data(), killer->charName.data(), killer->charName.size());
+        g_var->msgTargetName[killer->charName.size() - 1] = '\0';
+        g_var->msgValue = killCount;
+        Static::MsgTextOut(5, 509, 1);
     }
 }
 
@@ -65,7 +65,7 @@ void __declspec(naked) naked_0x5933F8()
         pushad
 
         push esi // user
-        call packet::remove_disguise
+        call packet::hook_0x303
         add esp,0x4
 
         popad
@@ -86,7 +86,7 @@ void __declspec(naked) naked_0x4EF2F3()
 
         push ebx // killCount
         push edi // killer
-        call packet::revenge_message
+        call packet::hook_0x229
         add esp,0x8
 
         popad

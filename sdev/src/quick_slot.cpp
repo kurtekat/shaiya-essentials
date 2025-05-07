@@ -1,4 +1,3 @@
-#include <array>
 #include <format>
 #include <string>
 #define WIN32_LEAN_AND_MEAN
@@ -18,13 +17,13 @@ namespace quick_slot
         auto x = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_X", 0, g_var->iniFileName.data());
         auto y = GetPrivateProfileIntA(section.c_str(), "QUICKSLOT3_POS_Y", 0, g_var->iniFileName.data());
 
-        g_pQuickSlot3->window.pos.x = x;
-        g_pQuickSlot3->window.pos.y = y;
+        g_pQuickSlot3->pos.x = x;
+        g_pQuickSlot3->pos.y = y;
 
         std::string str(MAX_PATH, 0);
         GetPrivateProfileStringA(section.c_str(), "QUICKSLOTPLUS_PLUS", "", str.data(), str.size(), g_var->iniFileName.data());
-        unknown->quickSlot2->plus = str.compare(0, 5, "FALSE") == 0 ? false : true;
-        CTexture::CreateFromFile(&unknown->quickSlot2->plusTexture, "data/interface", "main_slot_plus.tga", 32, 64);
+        unknown->quickSlot2->plus = str.compare(0, 4, "TRUE") == 0;
+        CTexture::CreateFromFile(&unknown->quickSlot2->plusImage, "data/interface", "main_slot_plus.tga", 32, 64);
     }
 
     void set_configuration(CQuickSlot* quickSlot)
@@ -36,12 +35,11 @@ namespace quick_slot
             std::string value = quickSlot->plus ? "TRUE" : "FALSE";
             WritePrivateProfileStringA(section.c_str(), "QUICKSLOTPLUS_PLUS", value.c_str(), g_var->iniFileName.data());
         }
-        
+
         if (quickSlot->id == 2)
         {
-            auto x = std::to_string(g_pQuickSlot3->window.pos.x);
-            auto y = std::to_string(g_pQuickSlot3->window.pos.y);
-
+            auto x = std::to_string(g_pQuickSlot3->pos.x);
+            auto y = std::to_string(g_pQuickSlot3->pos.y);
             WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_X", x.c_str(), g_var->iniFileName.data());
             WritePrivateProfileStringA(section.c_str(), "QUICKSLOT3_POS_Y", y.c_str(), g_var->iniFileName.data());
         }
@@ -59,7 +57,7 @@ namespace quick_slot
         get_configuration(unknown);
 
         if (!unknown->quickSlot1->plus || !unknown->quickSlot2->plus)
-            g_pQuickSlot3->window.visible = false;
+            g_pQuickSlot3->visible = false;
     }
 
     BOOL bag_to_bag(int bag, int slot)
