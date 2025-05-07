@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/include/common.h>
 #include "include/shaiya/common.h"
 
 namespace shaiya
@@ -8,9 +9,11 @@ namespace shaiya
     {
         LPDIRECT3DTEXTURE9 texture;
         D2D_SIZE_U size;
-        // 0x0C
+        // 0xC
     };
     #pragma pack(pop)
+
+    static_assert(sizeof(SStaticText) == 0xC);
 
     #pragma pack(push, 1)
     // 0x22B6DD0
@@ -25,8 +28,10 @@ namespace shaiya
         // 0x14
 
         static SStaticText* Create(const char* text);
-        static void Draw(SStaticText* staticText, long x, long y, float extrusion, D3DCOLOR argb);
-        static long GetTextWidth(const char* text);
+        static void Draw(SStaticText* staticText, int x, int y, float z, D3DCOLOR color);
+        static int GetTextWidth(const char* text);
     };
     #pragma pack(pop)
+
+    static_assert(sizeof(CStaticText) == 0x14);
 }

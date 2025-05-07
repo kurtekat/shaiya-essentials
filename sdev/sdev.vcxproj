@@ -13,39 +13,29 @@
   <ItemGroup>
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\shaiya\common.h" />
-    <ClInclude Include="include\shaiya\include\Attribute.h" />
-    <ClInclude Include="include\shaiya\include\AuthStatus.h" />
-    <ClInclude Include="include\shaiya\include\BillingItem.h" />
+    <ClInclude Include="include\shaiya\include\BillingItemInfo.h" />
     <ClInclude Include="include\shaiya\include\CCharacterChat.h" />
     <ClInclude Include="include\shaiya\include\CDataFile.h" />
-    <ClInclude Include="include\shaiya\include\ChatType.h" />
     <ClInclude Include="include\shaiya\include\CMonster.h" />
-    <ClInclude Include="include\shaiya\include\Country.h" />
+    <ClInclude Include="include\shaiya\include\CNpc.h" />
     <ClInclude Include="include\shaiya\include\CPlayerData.h" />
+    <ClInclude Include="include\shaiya\include\CQuickPotionSlot.h" />
     <ClInclude Include="include\shaiya\include\CQuickSlot.h" />
-    <ClInclude Include="include\shaiya\include\CraftName.h" />
     <ClInclude Include="include\shaiya\include\CStaticText.h" />
     <ClInclude Include="include\shaiya\include\CTexture.h" />
     <ClInclude Include="include\shaiya\include\CWindow.h" />
-    <ClInclude Include="include\shaiya\include\Family.h" />
-    <ClInclude Include="include\shaiya\include\Gems.h" />
-    <ClInclude Include="include\shaiya\include\Grow.h" />
+    <ClInclude Include="include\shaiya\include\ExcItem.h" />
     <ClInclude Include="include\shaiya\include\HexColor.h" />
     <ClInclude Include="include\shaiya\include\CCharacter.h" />
     <ClInclude Include="include\shaiya\include\CItem.h" />
     <ClInclude Include="include\shaiya\include\CNetwork.h" />
     <ClInclude Include="include\shaiya\include\CWorldMgr.h" />
     <ClInclude Include="include\shaiya\include\ItemInfo.h" />
-    <ClInclude Include="include\shaiya\include\Job.h" />
     <ClInclude Include="include\shaiya\include\MobInfo.h" />
-    <ClInclude Include="include\shaiya\include\MotionType.h" />
-    <ClInclude Include="include\shaiya\include\NpcType.h" />
-    <ClInclude Include="include\shaiya\include\PartyType.h" />
-    <ClInclude Include="include\shaiya\include\Sex.h" />
-    <ClInclude Include="include\shaiya\include\ShapeType.h" />
     <ClInclude Include="include\shaiya\include\SkillInfo.h" />
     <ClInclude Include="include\shaiya\include\TargetType.h" />
     <ClInclude Include="include\shaiya\include\Unknown.h" />
+    <ClInclude Include="include\shaiya\include\WindowType.h" />
     <ClInclude Include="include\static.h" />
     <ClInclude Include="resources\resource.h" />
   </ItemGroup>
@@ -56,7 +46,6 @@
     <ClCompile Include="include\shaiya\src\CQuickSlot.cpp" />
     <ClCompile Include="include\shaiya\src\CStaticText.cpp" />
     <ClCompile Include="include\shaiya\src\CTexture.cpp" />
-    <ClCompile Include="include\shaiya\src\CWindow.cpp" />
     <ClCompile Include="include\shaiya\src\CWorldMgr.cpp" />
     <ClCompile Include="src\camera_limit.cpp" />
     <ClCompile Include="src\cmd.cpp" />
@@ -130,7 +119,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;SDEVCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;WIN32;_DEBUG;SDEVCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -155,7 +144,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;SDEVCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;WIN32;NDEBUG;SDEVCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>

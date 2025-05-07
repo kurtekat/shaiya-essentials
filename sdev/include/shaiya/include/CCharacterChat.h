@@ -1,5 +1,5 @@
 #pragma once
-#include "include/shaiya/common.h"
+#include <shaiya/include/common.h>
 
 namespace shaiya
 {
@@ -15,4 +15,6 @@ namespace shaiya
         // 0x10
     };
     #pragma pack(pop)
+
+    static_assert(sizeof(CCharacterChat) == 0x10);
 }

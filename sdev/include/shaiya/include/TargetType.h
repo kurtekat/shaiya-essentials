@@ -1,14 +1,14 @@
 #pragma once
-#include "include/shaiya/common.h"
+#include <shaiya/include/common.h>
 
 namespace shaiya
 {
-    enum struct TargetType : UINT32
+    enum struct TargetType : int32_t
     {
+        Default = -1,
         Mob,
         Item,
         User,
-        Npc,
-        Default = UINT_MAX
+        Npc
     };
 }
