@@ -1,15 +1,11 @@
-#include <array>
-#include <format>
-#include <memory>
-#include <string>
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <util/util.h>
 #include "include/main.h"
 #include "include/static.h"
 #include "include/shaiya/include/CQuickSlot.h"
 #include "include/shaiya/include/Unknown.h"
 using namespace shaiya;
+
+// to-do: name these things a little better.
 
 namespace window
 {

@@ -1,7 +1,5 @@
 #include <util/util.h>
 #include "include/main.h"
-#include "include/static.h"
-using namespace shaiya;
 
 void __declspec(naked) naked_0x4E83CA()
 {
