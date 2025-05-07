@@ -1,6 +1,4 @@
-#include <sstream>
 #include <string>
-#include <vector>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include "util.h"
@@ -68,26 +66,4 @@ int util::write_memory(void* addr, int value, size_t size)
 
     std::memset(addr, value, size);
     return VirtualProtect(addr, size, protect, &protect);
-}
-
-int util::atoi(const std::string& str)
-{
-    return std::atoi(str.c_str());
-}
-
-std::vector<std::string> util::split(const std::string& str, char sep, size_t count)
-{
-    std::vector<std::string> vec;
-    if (!count)
-        return vec;
-
-    std::istringstream iss(str);
-    for (std::string str; std::getline(iss, str, sep); )
-    {
-        vec.push_back(str);
-        if (vec.size() == count)
-            break;
-    }
-
-    return vec;
 }
